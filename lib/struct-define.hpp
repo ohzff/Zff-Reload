@@ -36,6 +36,11 @@ class Point
     {
         return user == 0 && trigger.size () == 0;
     }
+
+    bool issafe ()
+    {
+        return user == 0;
+    }
 };
 
 /*

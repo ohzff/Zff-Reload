@@ -1,0 +1,40 @@
+name: Windows x64 MSVC Build
+
+on:
+  push:
+  pull_request:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+      - name: Build something requiring CL.EXE
+        run: |
+          make win-zff_main
+      # Runs a single command using the runners shell
+      - name: Check file
+        run: dir
+            # tag 查询github-Release
+      # 上传artifacts          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Zff-Windows.exe
+          path: win-zff_main.exe
+      # tag 上传Release
+      - name: uploadRelease
+        if: startsWith(github.event.ref, 'refs/tags/')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: win-zff_main.exe
+          asset_name: Zff-Windows.exe
+          tag: ${{ github.ref }}
+          overwrite: true

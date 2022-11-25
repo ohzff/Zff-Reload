@@ -9,7 +9,13 @@ void syscls ()
 
 const char CONPATH[20] = "/dev/tty";
 
-#define OUTPUT_TIME 0.1
+#define OUTPUT_TIME 1000
+#define MOVEUP_TIME 100000
+
+void msleep (long x)
+{
+    usleep (x);
+}
 
 // SYS way
 

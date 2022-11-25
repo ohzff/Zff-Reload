@@ -1,0 +1,32 @@
+name: MacOS Make
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: make
+      run: make zff_main_en
+    - name: check
+      run: ls
+      # tag 查询github-Release
+      # 上传artifacts          
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Zff-MacOS
+        path: zff_main_en
+    # tag 上传Release
+    - name: uploadRelease
+      if: startsWith(github.event.ref, 'refs/tags/')
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: zff_main_en
+        asset_name: Zff-MacOS
+        tag: ${{ github.ref }}
+        overwrite: true
