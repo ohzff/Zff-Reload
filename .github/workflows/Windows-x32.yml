@@ -18,7 +18,7 @@ jobs:
           arch: x86
       - name: Build something requiring CL.EXE
         run: |
-          make main
+          make main 
       # Runs a single command using the runners shell
       - name: Check file
         run: dir
