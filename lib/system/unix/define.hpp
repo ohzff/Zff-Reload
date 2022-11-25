@@ -9,6 +9,8 @@ void syscls ()
 
 const char CONPATH[20] = "/dev/tty";
 
+#define OUTPUT_TIME 0.1
+
 // SYS way
 
 //清屏

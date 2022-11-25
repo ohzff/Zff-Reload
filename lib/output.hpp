@@ -48,7 +48,7 @@ inline void output ()
 void dooutput ()
 {
     output ();
-    sleep (0.1);
+    sleep (OUTPUT_TIME);
     syscls ();
     if (OUTPUT_STOP == 1) return;
     dooutput ();

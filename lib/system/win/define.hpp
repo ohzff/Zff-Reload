@@ -6,3 +6,5 @@ void syscls ()
 }
 
 const char CONPATH[20] = "CON";
+
+#define OUTPUT_TIME 100
