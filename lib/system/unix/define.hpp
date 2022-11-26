@@ -11,6 +11,7 @@ const char CONPATH[20] = "/dev/tty";
 
 #define OUTPUT_TIME 1000
 #define MOVEUP_TIME 100000
+#define TIMEDIV 1
 
 void msleep (long x)
 {
@@ -38,7 +39,7 @@ void msleep (long x)
 #define MOVETO(x,y) printf("\033[%d;%dH", (x), (y))
  
 // 光标复位
-#define RESET_CURSOR() printf("\033[H")
+// #define RESET_CURSOR() printf("\033[H")
 // 隐藏光标
 #define HIDE_CURSOR() printf("\033[?25l")
  

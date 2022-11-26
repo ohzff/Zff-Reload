@@ -67,12 +67,13 @@ void ShowConsoleCursor(bool showFlag)
 }
 
 #define HIDE_CURSOR() ShowConsoleCursor(false)
-#define RESET_CURSOR() ShowConsoleCursor(true)
+#define SHOW_CURSOR() ShowConsoleCursor(true)
 
 const char CONPATH[20] = "CON";
 
 #define OUTPUT_TIME 1
 #define MOVEUP_TIME 100
+#define TIMEDIV 10
 
 void msleep (long x)
 {

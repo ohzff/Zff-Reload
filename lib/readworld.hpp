@@ -70,11 +70,13 @@ void read_world (int id)
     scanf ("%d", &triggerCount);
     for (int i = 1; i <= triggerCount; i ++)
     {
-        int ax, ay, bx, by;
-        scanf ("%d%d%d%d", &ax, &ay, &bx, &by);
+        int ax, ay, bx, by, to, delay;
+        scanf ("%d%d%d%d%d%d", &ax, &ay, &bx, &by, &to, &delay);
         trigger[i].id = 1;
         trigger[i].pos = Pos (ax, ay);
         trigger[i].ctrl = Pos (bx, by);
+        trigger[i].to = to;
+        trigger[i].delay = delay;
         for (int j = 1; j <= 4; j ++)
         {
             if (field[ax + dx[j]][ay + dy[j]].isfree ())

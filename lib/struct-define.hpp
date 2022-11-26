@@ -22,6 +22,9 @@ class Trigger
     int id; // trigger id
     Pos pos; // trigger pos
     Pos ctrl; // control pos
+    int tmp; // control id
+    int to; // control it to
+    int delay; // close delay
 };
 
 
@@ -56,6 +59,8 @@ USED id:
 int n, m, sx, sy, ex, ey, triggerCount = 0;
 Point field[inf][inf];
 Trigger trigger[inf * 10];
+bool trig_status[inf * 10];
+int trig_delay[inf * 10];
 
 int OUTPUT_STOP = 0;
 

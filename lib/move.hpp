@@ -23,6 +23,97 @@ inline int check(int num){
 
 int x, y;
 int ONJUMP = 0;
+int GAMEDIED = 0;
+
+inline void stop (int type = 0)
+{
+    GAMEDIED = 1, OUTPUT_STOP = 1;
+    if (type == 0) printf ("You died.\n");
+}
+
+inline bool pos_legal (int x, int y)
+{
+    return x > 0 && y > 0 && x <= n && y <= m;
+}
+
+void pos_legal_protect ()
+{
+    while (GAMEDIED == 0)
+    {
+        if (! pos_legal (x, y)) stop ();
+        msleep (OUTPUT_TIME);
+    }
+}
+
+void trigger_enable ()
+{
+    for (int i = 0; i < field[x][y].trigger.size (); i ++)
+    {
+        int id = field[x][y].trigger[i];
+        if (! trig_status[id])
+        {
+            trig_status[id] = true;
+            if (trig_delay[id] > 0) trig_delay[id] = 0;
+            trigger[id].tmp = field[trigger[id].ctrl.x][trigger[id].ctrl.y].user;
+            field[trigger[id].ctrl.x][trigger[id].ctrl.y].user = trigger[id].to;
+        }
+    }
+}
+
+void trigger_enable_protect ()
+{
+    while (GAMEDIED == 0)
+    {
+        trigger_enable ();
+        msleep (OUTPUT_TIME);
+    }
+}
+
+void do_trigger_disable (int i)
+{
+    if (trigger[i].ctrl.x == x && trigger[i].ctrl.y == y)
+    {
+        stop ();
+    }
+    else field[trigger[i].ctrl.x][trigger[i].ctrl.y].user = trigger[i].tmp;
+}
+
+void trigger_disable ()
+{
+    for (int i = 1; i <= triggerCount; i ++)
+    {
+        if (trig_status[i])
+        {
+            // do_trigger_disable (i);
+            if (find(field[x][y].trigger.begin(), field[x][y].trigger.end(), i) == field[x][y].trigger.end())
+            {
+                trig_status[i] = false;
+                if (trigger[i].delay == 0) do_trigger_disable (i);
+                else
+                {
+                    trig_delay[i] = trigger[i].delay / TIMEDIV;
+                }
+            }
+        }
+        if (trig_status[i] == false)
+        {
+            if (trig_delay[i] > 0)
+            {
+                trig_delay[i] --;
+                if (trig_delay[i] <= 0) do_trigger_disable (i);
+            }
+        }
+    }
+}
+
+void trigger_disable_protect ()
+{
+    while (GAMEDIED == 0)
+    {
+        trigger_disable ();
+        msleep (OUTPUT_TIME);
+    }
+}
 
 inline void move_g ()
 {
@@ -75,9 +166,16 @@ void jump ()
 void ctrl ()
 {
     x = sx, y = sy;
+    ONJUMP = 0, GAMEDIED = 0;
 
     thread g_thread (move_g_protect);
+    thread pos_thread (pos_legal_protect);
+    thread trigger_enable_thread (trigger_enable_protect);
+    thread trigger_disable_thread (trigger_disable_protect);
     g_thread.detach ();
+    pos_thread.detach ();
+    trigger_enable_thread.detach ();
+    trigger_disable_thread.detach ();
 
     int read;
     while (true)
@@ -88,6 +186,11 @@ void ctrl ()
             read = check (keyboard ());
             // read = keyverify ();
             // read = 1;
+            if (GAMEDIED == 1)
+            {
+                read = 114514;
+                break;
+            }
         }
         if (read == 3 || read == 4)
         {
@@ -103,7 +206,12 @@ void ctrl ()
         }
         if (read == 9)
         {
-            OUTPUT_STOP = 1;
+            stop (1);
+            return;
+        }
+
+        if (GAMEDIED == 1 || read == 114514)
+        {
             return;
         }
     }
