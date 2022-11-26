@@ -47,11 +47,13 @@ inline void output ()
 
 void dooutput ()
 {
-    output ();
-    msleep (OUTPUT_TIME);
-    syscls ();
-    if (OUTPUT_STOP == 1) return;
-    dooutput ();
+    while (OUTPUT_STOP == 0)
+    {
+        output ();
+        msleep (OUTPUT_TIME);
+        // syscls ();
+        MOVETO (0, 0);
+    }
 }
 
 #endif

@@ -17,6 +17,9 @@ int main ()
 {
     read_world (1);
 
+    HIDE_CURSOR ();
+    syscls ();
+
     thread output_thread (dooutput);
     output_thread.detach ();
     // int x = 1;
@@ -28,6 +31,7 @@ int main ()
 
     ctrl ();
 
+    RESET_CURSOR ();
     OUTPUT_STOP = 1;
     return 0;
 }

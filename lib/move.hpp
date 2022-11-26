@@ -22,6 +22,7 @@ inline int check(int num){
 }
 
 int x, y;
+int ONJUMP = 0;
 
 inline void move_g ()
 {
@@ -34,6 +35,15 @@ inline void move_g ()
     }
 }
 
+void move_g_protect ()
+{
+    while (OUTPUT_STOP == 0)
+    {
+        if (ONJUMP == 0) move_g ();
+        msleep (OUTPUT_TIME);
+    }
+}
+
 void move_left_right (int t)
 {
     if (field[x][y + t].issafe ())
@@ -41,12 +51,14 @@ void move_left_right (int t)
         field[x][y].user = 0;
         field[x][y + t].user = 1;
         y += t;
-        move_g ();
+        // move_g ();
     }
 }
 
 void jump ()
 {
+    if (ONJUMP) return;
+    ONJUMP = 1;
     for (int i = 1; i < 3; i ++)
     {
         if (field[x - 1][y].issafe ())
@@ -54,15 +66,19 @@ void jump ()
             field[x][y].user = 0;
             field[x - 1][y].user = 1;
             x --;
-            msleep (100000);
+            msleep (MOVEUP_TIME);
         }
     }
-    move_g ();
+    ONJUMP = 0;
 }
 
 void ctrl ()
 {
     x = sx, y = sy;
+
+    thread g_thread (move_g_protect);
+    g_thread.detach ();
+
     int read;
     while (true)
     {
