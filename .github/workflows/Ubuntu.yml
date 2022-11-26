@@ -10,8 +10,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: make
-      run: make main
+    - name: gcc
+      run: g++ ./main.cpp -o main -pthread
     - name: check
       run: ls
       # tag 查询github-Release

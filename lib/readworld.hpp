@@ -10,7 +10,7 @@ char charfield[1005][1005];
 
 char* inttochar (int x)
 {
-    char str[100];
+    static char str[100];
     sprintf (str, "%d", x);
     return str;
 }

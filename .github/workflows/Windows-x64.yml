@@ -20,7 +20,7 @@ jobs:
           platform: x64
       - name: Build something requiring CL.EXE
         run: |
-          ${{ steps.setup.outputs.gxx }} main.cpp -o main.exe -std=c++11
+          ${{ steps.setup.outputs.gxx }} main.cpp -o main.exe -std=c++11 -static-libgcc -static-libstdc++ -L.
       # Runs a single command using the runners shell
       - name: Check file
         run: dir
