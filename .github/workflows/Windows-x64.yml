@@ -26,10 +26,12 @@ jobs:
         run: dir
             # tag 查询github-Release
       # 上传artifacts          
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: Zff-Windows.exe
-          path: main.exe
+          path: |
+            main.exe
+            usr/
       # tag 上传Release
       - name: uploadRelease
         if: startsWith(github.event.ref, 'refs/tags/')

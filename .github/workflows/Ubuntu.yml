@@ -16,10 +16,12 @@ jobs:
       run: ls
       # tag 查询github-Release
       # 上传artifacts          
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: Zff-Ubuntu
-        path: main
+        path: |
+          main
+          usr/
     # tag 上传Release
     - name: uploadRelease
       if: startsWith(github.event.ref, 'refs/tags/')
