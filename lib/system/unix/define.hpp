@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <stdio.h>
+#include <sys/ioctl.h>
 
 void syscls ()
 {
@@ -74,3 +75,11 @@ void msleep (long x)
 #define BACKGROUND_PURPLE 45
 #define BACKGROUND_DEEP_GREEN 46
 #define BACKGROUND_WHITE 47
+
+struct winsize w;
+
+pair <int, int> getWindow ()
+{
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+    return pair <int,int> (w.ws_row, w.ws_col);
+}

@@ -42,7 +42,7 @@ class Point
 
     bool issafe ()
     {
-        return user == 0;
+        return user == 0 || user == 5;
     }
 };
 
@@ -53,6 +53,7 @@ USED id:
 2. -
 3. |
 4. Trigger
+5. End
 ...
 */
 
@@ -61,6 +62,8 @@ Point field[inf][inf];
 Trigger trigger[inf * 10];
 bool trig_status[inf * 10];
 int trig_delay[inf * 10];
+int x, y;
+char OUTPUT_RIGHT_INFO[1000];
 
 int OUTPUT_STOP = 0;
 

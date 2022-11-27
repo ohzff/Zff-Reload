@@ -89,6 +89,7 @@ void read_world (int id)
     freopen (CONPATH, "r", stdin);
 
     field[sx][sy].user = 1;
+    field[ex][ey].user = 5;
 }
 
 #endif

@@ -21,14 +21,38 @@ inline int check(int num){
 	return 0;
 }
 
-int x, y;
 int ONJUMP = 0;
 int GAMEDIED = 0;
+int GAMEWIN = 0;
+
+pair <int, int> _w;
+
+void windowsize ()
+{
+    _w = getWindow ();
+    WINDOW_X = _w.first - 2, WINDOW_Y = _w.second;
+}
+
+void windowsize_protect ()
+{
+    while (OUTPUT_STOP == 0)
+    {
+        windowsize ();
+        msleep (OUTPUT_TIME);
+    }
+}
 
 inline void stop (int type = 0)
 {
     GAMEDIED = 1, OUTPUT_STOP = 1;
     if (type == 0) printf ("You died.\n");
+}
+
+inline void win ()
+{
+    GAMEWIN = 1;
+    stop (1);
+    printf ("You Win!\n");
 }
 
 inline bool pos_legal (int x, int y)
@@ -41,6 +65,7 @@ void pos_legal_protect ()
     while (GAMEDIED == 0)
     {
         if (! pos_legal (x, y)) stop ();
+        if (x == ex && y == ey) win ();
         msleep (OUTPUT_TIME);
     }
 }
@@ -54,7 +79,7 @@ void trigger_enable ()
         {
             trig_status[id] = true;
             if (trig_delay[id] > 0) trig_delay[id] = 0;
-            trigger[id].tmp = field[trigger[id].ctrl.x][trigger[id].ctrl.y].user;
+            else trigger[id].tmp = field[trigger[id].ctrl.x][trigger[id].ctrl.y].user;
             field[trigger[id].ctrl.x][trigger[id].ctrl.y].user = trigger[id].to;
         }
     }
@@ -163,15 +188,18 @@ void jump ()
     ONJUMP = 0;
 }
 
-void ctrl ()
+int ctrl ()
 {
     x = sx, y = sy;
-    ONJUMP = 0, GAMEDIED = 0;
+    ONJUMP = 0, GAMEDIED = 0, GAMEWIN = 0;
+    strcpy (OUTPUT_RIGHT_INFO, "Level 1");
 
+    thread window_thread (windowsize_protect);
     thread g_thread (move_g_protect);
     thread pos_thread (pos_legal_protect);
     thread trigger_enable_thread (trigger_enable_protect);
     thread trigger_disable_thread (trigger_disable_protect);
+    window_thread.detach ();
     g_thread.detach ();
     pos_thread.detach ();
     trigger_enable_thread.detach ();
@@ -207,12 +235,12 @@ void ctrl ()
         if (read == 9)
         {
             stop (1);
-            return;
+            return 0;
         }
 
         if (GAMEDIED == 1 || read == 114514)
         {
-            return;
+            return GAMEWIN;
         }
     }
 }

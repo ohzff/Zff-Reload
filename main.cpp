@@ -22,24 +22,21 @@ int main ()
     {
         return 1;
     }
-    
-    read_world (1);
 
-    HIDE_CURSOR ();
-    syscls ();
+    for (int i = 1; i <= 2; i ++)
+    {
+        read_world (i);
 
-    thread output_thread (dooutput);
-    output_thread.detach ();
-    // int x = 1;
-    // while (x)
-    // {
-    //     scanf ("%d", &x);
-    //     printf ("%d\n", x);
-    // }
+        HIDE_CURSOR ();
+        syscls ();
 
-    ctrl ();
+        thread output_thread (dooutput);
+        output_thread.detach ();
 
-    SHOW_CURSOR ();
-    OUTPUT_STOP = 1;
+        if (! ctrl ()) break;
+
+        SHOW_CURSOR ();
+        OUTPUT_STOP = 1;
+    }
     return 0;
 }

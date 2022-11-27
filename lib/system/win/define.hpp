@@ -80,3 +80,10 @@ void msleep (long x)
     Sleep (x);
 }
 
+CONSOLE_SCREEN_BUFFER_INFO csbi;
+
+pair <int, int> getWindow ()
+{
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    return pair <int, int> (csbi.srWindow.Bottom - csbi.srWindow.Top + 1, csbi.srWindow.Right - csbi.srWindow.Left);
+}
