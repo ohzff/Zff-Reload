@@ -28,6 +28,13 @@ Second, run the executable file.
 
 Use `Left` `Right` arrow to move the people and `Up` arrow or `SPACE bar` to jump up to reach the exit place `#`.
 
+# FAQ
+
+## `usr/` folder cannot found
+
+1. Go [here](https://github.com/ohzff/Zff-Reload/releases) to get an zip file `data.zip`.
+2. Unzip it and put `usr/` with your executable file.
+
 # More...
 
 ...
