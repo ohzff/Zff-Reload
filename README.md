@@ -20,6 +20,67 @@ Download the source and type:
 g++ ./main.cpp -o zff -pthread -std=c++11
 ```
 
+# Development
+
+## App developing
+
+If you have any idea, please create a pull requst to tell us.
+
+**Windows compile flags**
+
+```bash
+g++ ./main.cpp -o zff -std=c++11 -static-libgcc -static-libstdc++ -L.
+```
+
+**Mac&Linux compile flags**
+
+```bash
+g++ ./main.cpp -o zff -std=c++11 -pthread
+```
+
+## World data developing
+
+A world includes `main`, `world`, `trigger` three files in an ID folder.
+
+```bash
+usr
+└── world
+    ├── 1                   # ID folder
+    │   ├── main            # main info
+    │   ├── trigger         # Trigger settings
+    │   └── world           # Full world information
+    └── 2
+        ├── main
+        ├── trigger
+        └── world
+```
+
+**`main` file**
+
+6 integers: `n, m, Sx, Sy, Ex, Ey`
+
+- `n` for the number of rows.
+- `m` for the number of columns.
+- `(Sx, Sy)` for the starting position.
+- `(Ex, Ey)` for the ending position.
+
+**`world` file**
+
+A `n*m` matrix, saved the world information.
+
+> **Notice: Please fill the `n*m` frame with SPACE or symbol `@`!**
+
+**`trigger` file**
+
+One integers `n` in the first line, refering to the number of triggers.
+
+The following `n` rows with 6 integers `Tx, Ty, Cx, Cy, To, d` in each row.
+
+- `(Tx, Ty)` for the position of trigger.
+- `(Cx, Cy)` for the position that trigger controled.
+- `To` for the ID that trigger changes to.
+- `d` for the delay time of disappear (ms).
+
 # Usage
 
 First, make sure `usr/` folder is there with your executable file.
