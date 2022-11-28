@@ -83,3 +83,5 @@ pair <int, int> getWindow ()
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     return pair <int,int> (w.ws_row, w.ws_col);
 }
+
+#define putchar(x) putchar_unlocked(x)

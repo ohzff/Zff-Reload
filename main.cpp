@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstdio>
+#include <stdio.h>
 #include <cstring>
 #include <cstdlib>
 #include <ctime>
@@ -33,10 +33,13 @@ int main ()
         thread output_thread (dooutput);
         output_thread.detach ();
 
+        OUTPUT_STOP = 0, GAMEDIED = 0, GAMEWIN = 0;
+
         if (! ctrl ()) break;
 
         SHOW_CURSOR ();
         OUTPUT_STOP = 1;
     }
+    SHOW_CURSOR ();
     return 0;
 }

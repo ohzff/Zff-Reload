@@ -45,14 +45,21 @@ void windowsize_protect ()
 inline void stop (int type = 0)
 {
     GAMEDIED = 1, OUTPUT_STOP = 1;
-    if (type == 0) printf ("You died.\n");
+    if (type == 0)
+    {
+        syscls ();
+        // MOVETO (0, 0);
+        printf (" :( You died.\n");
+    }
 }
 
 inline void win ()
 {
     GAMEWIN = 1;
     stop (1);
-    printf ("You Win!\n");
+    syscls ();
+    // MOVETO (0, 0);
+    printf (" :) You Win!\n");
 }
 
 inline bool pos_legal (int x, int y)
@@ -116,7 +123,7 @@ void trigger_disable ()
                 if (trigger[i].delay == 0) do_trigger_disable (i);
                 else
                 {
-                    trig_delay[i] = trigger[i].delay / TIMEDIV;
+                    trig_delay[i] = trigger[i].delay / 10;
                 }
             }
         }
@@ -171,6 +178,22 @@ void move_left_right (int t)
     }
 }
 
+void allinone_protect ()
+{
+    while (GAMEDIED == 0)
+    {
+        windowsize ();
+
+        if (! pos_legal (x, y)) stop ();
+        if (x == ex && y == ey) win ();
+
+        trigger_disable ();
+        trigger_enable ();
+
+        msleep (OUTPUT_TIME * 10);
+    }
+}
+
 void jump ()
 {
     if (ONJUMP) return;
@@ -194,16 +217,18 @@ int ctrl ()
     ONJUMP = 0, GAMEDIED = 0, GAMEWIN = 0;
     strcpy (OUTPUT_RIGHT_INFO, "Level 1");
 
-    thread window_thread (windowsize_protect);
+    thread allinone_thread (allinone_protect);
+    // thread window_thread (windowsize_protect);
     thread g_thread (move_g_protect);
-    thread pos_thread (pos_legal_protect);
-    thread trigger_enable_thread (trigger_enable_protect);
-    thread trigger_disable_thread (trigger_disable_protect);
-    window_thread.detach ();
+    // thread pos_thread (pos_legal_protect);
+    // thread trigger_enable_thread (trigger_enable_protect);
+    // thread trigger_disable_thread (trigger_disable_protect);
+    allinone_thread.detach ();
+    // window_thread.detach ();
     g_thread.detach ();
-    pos_thread.detach ();
-    trigger_enable_thread.detach ();
-    trigger_disable_thread.detach ();
+    // pos_thread.detach ();
+    // trigger_enable_thread.detach ();
+    // trigger_disable_thread.detach ();
 
     int read;
     while (true)

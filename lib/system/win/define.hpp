@@ -87,3 +87,5 @@ pair <int, int> getWindow ()
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
     return pair <int, int> (csbi.srWindow.Bottom - csbi.srWindow.Top + 1, csbi.srWindow.Right - csbi.srWindow.Left);
 }
+
+#define putchar(x) _putchar_nolock(x)

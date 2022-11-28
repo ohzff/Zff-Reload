@@ -33,12 +33,25 @@ jobs:
             main.exe
             usr/
       # tag 上传Release
-      - name: uploadRelease
+      - name: upload Release
         if: startsWith(github.event.ref, 'refs/tags/')
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: main.exe
           asset_name: Zff-Windows.exe
+          tag: ${{ github.ref }}
+          overwrite: true
+      - uses: vimtor/action-zip@v1
+        with:
+          files: usr/ README.md
+          dest: data.zip
+      - name: upload Release (usr/ data)
+        if: startsWith(github.event.ref, 'refs/tags/')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: data.zip
+          asset_name: data.zip
           tag: ${{ github.ref }}
           overwrite: true

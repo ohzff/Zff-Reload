@@ -6,7 +6,8 @@
 
 const char readpath[100] = "usr/world/";
 
-char charfield[1005][1005];
+// char charfield[1005][1005];
+string str;
 
 char* inttochar (int x)
 {
@@ -17,6 +18,12 @@ char* inttochar (int x)
 
 void read_world (int id)
 {
+    printf ("Reading data from %d...\n", id);
+
+    memset (trigger, 0, sizeof (trigger));
+    memset (field, 0, sizeof (field));
+    triggerCount = 0, OUTPUT_STOP = 0;
+
     char main_path[200] = "";
     char world_path[200] = "";
     char trigger_path[200] = "";
@@ -34,20 +41,44 @@ void read_world (int id)
     strcat (trigger_path, "/trigger");
 
     printf ("%s\n", main_path);
+    printf ("%s\n", world_path);
+    printf ("%s\n", trigger_path);
 
     freopen (main_path, "r", stdin);
     scanf ("%d%d", &n, &m);
-    scanf ("%d%d%d%d\n", &sx, &sy, &ex, &ey);
+    scanf ("%d%d%d%d", &sx, &sy, &ex, &ey);
+    printf ("N=%d, M=%d\n", n, m);
 
     freopen (world_path, "r", stdin);
+    // memset (charfield, 0, sizeof (charfield));
     for (int i = 1; i <= n; i ++)
     {
-        cin.get (charfield[i], 1005);
-        printf ("%d\n", strlen (charfield[i]));
-        getchar ();
-        for (int j = 1; j <= m; j ++)
+        // charfield[i][0] = '\n';
+        // cin.get (charfield[i], 1005);
+        // printf ("%d\n", strlen (charfield[i]));
+        // string str;
+        // getline (cin, str);
+        
+        // if ()
+
+        // printf ("%d\n", str.length ());
+        // getchar ();
+
+        // char str[inf];
+        // for (int j )
+
+        for (int j = 1;j <= m; j ++)
         {
-            switch (charfield[i][j - 1])
+            // charfield[i][j] = getchar ();
+            // if (charfield[i][j] == '\n' || charfield[i][j] == '\0')
+            // {
+            //     printf ("%d\n", j);
+            //     break;
+            // }
+            char ch;
+            scanf ("%c", &ch);
+            if (ch == '\n' || ch == '\0'){ i--; break; }
+            switch (ch)
             {
             case '-':
                 field[i][j].user = 2;
@@ -90,6 +121,7 @@ void read_world (int id)
 
     field[sx][sy].user = 1;
     field[ex][ey].user = 5;
+    // exit (0);
 }
 
 #endif
