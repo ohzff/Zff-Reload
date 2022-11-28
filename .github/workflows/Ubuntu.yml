@@ -23,6 +23,9 @@ jobs:
           main
           usr/
     # tag 上传Release
+    - uses: montudor/action-zip@v1
+      with:
+        args: zip -qq -r data.zip usr
     - name: uploadRelease
       if: startsWith(github.event.ref, 'refs/tags/')
       uses: svenstaro/upload-release-action@v2
@@ -30,5 +33,14 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: main
         asset_name: Zff-Ubuntu
+        tag: ${{ github.ref }}
+        overwrite: true
+    - name: upload Release (usr/ data)
+      if: startsWith(github.event.ref, 'refs/tags/')
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: data.zip
+        asset_name: data.zip
         tag: ${{ github.ref }}
         overwrite: true
