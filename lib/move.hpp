@@ -59,7 +59,7 @@ inline void win ()
     stop (1);
     syscls ();
     // MOVETO (0, 0);
-    printf (" :) You Win!\n");
+    printf (" :) You won!\n");
 }
 
 inline bool pos_legal (int x, int y)

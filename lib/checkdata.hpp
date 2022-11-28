@@ -11,7 +11,7 @@ bool checkdata ()
     struct stat buffer;   
     if (stat ("usr/world/1/main", &buffer) != 0)
     {
-        printf ("Cannot read data! Please give 'usr/' folder me.\n");
+        printf ("Cannot read data! Please give 'usr/' folder to me.\n");
         printf ("More info: https://github.com/ohzff/Zff-Reload/\n");
         return false;
     }
