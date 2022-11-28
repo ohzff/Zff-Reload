@@ -50,6 +50,7 @@ inline void stop (int type = 0)
         syscls ();
         // MOVETO (0, 0);
         printf (" :( You died.\n");
+        printf ("\n Press any key to exit.\n");
     }
 }
 
@@ -60,6 +61,7 @@ inline void win ()
     syscls ();
     // MOVETO (0, 0);
     printf (" :) You won!\n");
+    printf ("\n Press any key to continue.\n");
 }
 
 inline bool pos_legal (int x, int y)
@@ -86,7 +88,7 @@ void trigger_enable ()
         {
             trig_status[id] = true;
             if (trig_delay[id] > 0) trig_delay[id] = 0;
-            else trigger[id].tmp = field[trigger[id].ctrl.x][trigger[id].ctrl.y].user;
+            // else trigger[id].tmp = field[trigger[id].ctrl.x][trigger[id].ctrl.y].user;
             field[trigger[id].ctrl.x][trigger[id].ctrl.y].user = trigger[id].to;
         }
     }
@@ -211,11 +213,12 @@ void jump ()
     ONJUMP = 0;
 }
 
-int ctrl ()
+int ctrl (int level)
 {
     x = sx, y = sy;
     ONJUMP = 0, GAMEDIED = 0, GAMEWIN = 0;
-    strcpy (OUTPUT_RIGHT_INFO, "Level 1");
+    strcpy (OUTPUT_RIGHT_INFO, "Level ");
+    strcat (OUTPUT_RIGHT_INFO, inttochar (level));
 
     thread allinone_thread (allinone_protect);
     // thread window_thread (windowsize_protect);

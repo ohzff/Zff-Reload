@@ -108,6 +108,7 @@ void read_world (int id)
         trigger[i].ctrl = Pos (bx, by);
         trigger[i].to = to;
         trigger[i].delay = delay;
+        trigger[i].tmp = field[bx][by].user;
         for (int j = 1; j <= 4; j ++)
         {
             if (field[ax + dx[j]][ay + dy[j]].isfree ())

@@ -35,7 +35,7 @@ int main ()
 
         OUTPUT_STOP = 0, GAMEDIED = 0, GAMEWIN = 0;
 
-        if (! ctrl ()) break;
+        if (! ctrl (i)) break;
 
         SHOW_CURSOR ();
         OUTPUT_STOP = 1;
