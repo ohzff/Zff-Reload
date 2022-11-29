@@ -3,7 +3,7 @@
 
 #include <thread>
 
-int WINDOW_X, WINDOW_Y;
+int WINDOW_X, WINDOW_Y, LASTLINE;
 
 /*
 inline void output ()
@@ -105,7 +105,7 @@ inline void output ()
     puts (OUTPUT_RIGHT_INFO); //putchar (' '); putchar ('\n');
     if (WINDOW_X == 0 || WINDOW_Y == 0) return;
     int wstartx, wstarty, wendx, wendy, wwaitx, wwaity;
-    if (WINDOW_X >= n)
+    if (WINDOW_X > n)
     {
         wstartx = 1, wendx = n;
         wwaitx = (WINDOW_X - n) >> 1;
@@ -115,7 +115,7 @@ inline void output ()
         wstartx = x - (WINDOW_X >> 1), wendx = WINDOW_X + wstartx - 3;
         wwaitx = 0;
     }
-    if (WINDOW_Y >= m)
+    if (WINDOW_Y > m)
     {
         wstarty = 1, wendy = m;
         wwaity = (WINDOW_Y - m) >> 1;
@@ -162,6 +162,7 @@ inline void output ()
     }
     printf ("%s", BOTTOM_RIGHT_INFO);
     putchar ('\n');
+    if (LASTLINE) for (int i = 1; i <= WINDOW_Y; i ++) putchar (' ');
 }
 
 
