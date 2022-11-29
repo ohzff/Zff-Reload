@@ -2,6 +2,8 @@
 
 This is a reloaded version of Zff.
 
+![GitHub repo size](https://img.shields.io/github/repo-size/ohzff/Zff-Reload?label=size&logo=github)  ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/ohzff/Zff-Reload)  ![GitHub top language](https://img.shields.io/github/languages/top/ohzff/Zff-Reload)
+
 **Notice: Developing now!**
 
 # Getting started
