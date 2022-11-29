@@ -161,8 +161,8 @@ inline void output ()
         putchar (' ');
     }
     printf ("%s", BOTTOM_RIGHT_INFO);
-    putchar ('\n');
-    if (LASTLINE) for (int i = 1; i <= WINDOW_Y; i ++) putchar (' ');
+    if (!LASTLINE) putchar ('\n');
+    // else for (int i = 1; i < WINDOW_Y; i ++) putchar (' ');
 }
 
 

@@ -33,7 +33,7 @@ void windowsize ()
 {
     _w = getWindow ();
     WINDOW_X = _w.first - 1, WINDOW_Y = _w.second;
-    if (_w.first & 1) {WINDOW_X --, LASTLINE = true;}
+    if (_w.first & 1) {WINDOW_X ++, LASTLINE = true;}
     else LASTLINE = false;
     if (WINDOW_Y & 1) WINDOW_Y --;
 }
