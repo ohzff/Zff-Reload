@@ -112,7 +112,7 @@ inline void output ()
     }
     else
     {
-        wstartx = x - (WINDOW_X >> 1), wendx = WINDOW_X + wstartx - 1;
+        wstartx = x - (WINDOW_X >> 1), wendx = WINDOW_X + wstartx - 3;
         wwaitx = 0;
     }
     if (WINDOW_Y >= m)
@@ -154,7 +154,14 @@ inline void output ()
         for (int j = 1; j <= WINDOW_Y; j ++) putchar (' ');
         putchar ('\n');
     }
-    for (int i = 1; i <= WINDOW_Y; i ++) putchar (' ');
+    // for (int i = 1; i <= WINDOW_Y; i ++) putchar (' ');
+    printf ("%s", BOTTOM_LEFT_INFO);
+    for (int i = strlen (BOTTOM_LEFT_INFO); i < WINDOW_Y - strlen (BOTTOM_RIGHT_INFO) - 1; i ++)
+    {
+        putchar (' ');
+    }
+    printf ("%s", BOTTOM_RIGHT_INFO);
+    putchar ('\n');
 }
 
 

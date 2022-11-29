@@ -5,9 +5,10 @@
 #include "struct-define.hpp"
 
 const char readpath[100] = "usr/world/";
+const char custompath[100] = "usr/custom/world/";
 
 // char charfield[1005][1005];
-string str;
+// string str;
 
 char* inttochar (int x)
 {
@@ -16,29 +17,46 @@ char* inttochar (int x)
     return str;
 }
 
-void read_world (int id)
+void read_world (int id, string custom = "")
 {
-    printf ("Reading data from %d...\n", id);
-
-    memset (trigger, 0, sizeof (trigger));
-    memset (field, 0, sizeof (field));
-    triggerCount = 0, OUTPUT_STOP = 0;
-
     char main_path[200] = "";
     char world_path[200] = "";
     char trigger_path[200] = "";
 
-    strcat (main_path, readpath);
-    strcat (main_path, inttochar (id));
-    strcat (main_path, "/main");
+    if (id == -1)
+    {
+        strcat (main_path, custompath);
+        strcat (main_path, custom.c_str ());
+        strcat (main_path, "/main");
 
-    strcat (world_path, readpath);
-    strcat (world_path, inttochar (id));
-    strcat (world_path, "/world");
+        strcat (world_path, custompath);
+        strcat (world_path, custom.c_str ());
+        strcat (world_path, "/world");
 
-    strcat (trigger_path, readpath);
-    strcat (trigger_path, inttochar (id));
-    strcat (trigger_path, "/trigger");
+        strcat (trigger_path, custompath);
+        strcat (trigger_path, custom.c_str ());
+        strcat (trigger_path, "/trigger");
+    }
+    else
+    {
+        strcat (main_path, readpath);
+        strcat (main_path, inttochar (id));
+        strcat (main_path, "/main");
+
+        strcat (world_path, readpath);
+        strcat (world_path, inttochar (id));
+        strcat (world_path, "/world");
+
+        strcat (trigger_path, readpath);
+        strcat (trigger_path, inttochar (id));
+        strcat (trigger_path, "/trigger");
+    }
+
+    printf ("Reading data from...\n");
+
+    memset (trigger, 0, sizeof (trigger));
+    memset (field, 0, sizeof (field));
+    triggerCount = 0, OUTPUT_STOP = 0;
 
     printf ("%s\n", main_path);
     printf ("%s\n", world_path);

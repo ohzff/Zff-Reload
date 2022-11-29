@@ -37,7 +37,7 @@ class Point
 
     bool isfree ()
     {
-        return user == 0 && trigger.size () == 0;
+        return user == 0;
     }
 
     bool issafe ()
@@ -63,7 +63,7 @@ Trigger trigger[inf * 10];
 bool trig_status[inf * 10];
 int trig_delay[inf * 10];
 int x, y;
-char OUTPUT_RIGHT_INFO[1000];
+char OUTPUT_RIGHT_INFO[1000], BOTTOM_LEFT_INFO[1000], BOTTOM_RIGHT_INFO[1000];
 
 int OUTPUT_STOP = 0;
 

@@ -17,6 +17,8 @@ inline int check(int num){
 	if(num==113)return 9;
 	if(num==27)return 27;
     if(num==32)return 32;
+    if(num==127)return 127;
+    if(num=='/')return num;
     if(num==224||num==-32||num == 91)return -1;
 	return 0;
 }
@@ -30,7 +32,7 @@ pair <int, int> _w;
 void windowsize ()
 {
     _w = getWindow ();
-    WINDOW_X = _w.first - 2, WINDOW_Y = _w.second;
+    WINDOW_X = _w.first - 1, WINDOW_Y = _w.second;
 }
 
 void windowsize_protect ()
@@ -180,6 +182,15 @@ void move_left_right (int t)
     }
 }
 
+void update_pos ()
+{
+    strcpy (BOTTOM_RIGHT_INFO, "(");
+    strcat (BOTTOM_RIGHT_INFO, inttochar (x));
+    strcat (BOTTOM_RIGHT_INFO, ", ");
+    strcat (BOTTOM_RIGHT_INFO, inttochar (y));
+    strcat (BOTTOM_RIGHT_INFO, ")");
+}
+
 void allinone_protect ()
 {
     while (GAMEDIED == 0)
@@ -188,6 +199,8 @@ void allinone_protect ()
 
         if (! pos_legal (x, y)) stop ();
         if (x == ex && y == ey) win ();
+
+        update_pos ();
 
         trigger_disable ();
         trigger_enable ();
@@ -213,10 +226,65 @@ void jump ()
     ONJUMP = 0;
 }
 
+void tokenize(std::string const &str, const char* delim,
+            std::vector<std::string> &out)
+{
+    char *token = strtok(const_cast<char*>(str.c_str()), delim);
+    while (token != nullptr)
+    {
+        out.push_back(std::string(token));
+        token = strtok(nullptr, delim);
+    }
+}
+
+void command ()
+{
+    while (true)
+    {
+        int read = keyboard ();
+        if (read == 27) return;
+        if (read == 127)
+        {
+            BOTTOM_LEFT_INFO[strlen (BOTTOM_LEFT_INFO) - 1] = '\0';
+        }
+        else if ((read >= 'a' && read <= 'z') || (read >= '0' && read <= '9') || read == ' ')
+        {
+            char tmp[2] = {char (read)};
+            strcat (BOTTOM_LEFT_INFO, tmp);
+        }
+        else if (read == 10)
+        {
+            string str (BOTTOM_LEFT_INFO);
+            vector <string> arg;
+            tokenize (str, " ", arg);
+            if (arg[0] == "/pos")
+            {
+                if (arg.size () == 3)
+                {
+                    int ix, iy;
+                    sscanf (arg[1].c_str (), "%d", &ix);
+                    sscanf (arg[2].c_str (), "%d", &iy);
+                    if (field[ix][iy].issafe () && pos_legal (ix, iy))
+                    {
+                        field[x][y].user = 0, field[ix][iy].user = 1;
+                        x = ix, y = iy;
+                        return;
+                    }
+                }
+                strcpy (BOTTOM_LEFT_INFO, "ERROR");
+                msleep (OUTPUT_TIME * 1000);
+                return;
+            }
+        }
+    }
+}
+
 int ctrl (int level)
 {
     x = sx, y = sy;
     ONJUMP = 0, GAMEDIED = 0, GAMEWIN = 0;
+    memset (trig_status, 0, sizeof (trig_status));
+    memset (trig_delay, 0, sizeof (trig_delay));
     strcpy (OUTPUT_RIGHT_INFO, "Level ");
     strcat (OUTPUT_RIGHT_INFO, inttochar (level));
 
@@ -236,8 +304,9 @@ int ctrl (int level)
     int read;
     while (true)
     {
+        strcpy (BOTTOM_LEFT_INFO, " Ready");
         read = 0;
-        while ((read < 1 || read > 4) && read != 9 && read != 32)
+        while ((read < 1 || read > 4) && read != 9 && read != 32 && read != '/')
         {
             read = check (keyboard ());
             // read = keyverify ();
@@ -248,6 +317,12 @@ int ctrl (int level)
                 break;
             }
         }
+        if (read == '/')
+        {
+            strcpy (BOTTOM_LEFT_INFO, " /");
+            command ();
+        }
+        strcpy (BOTTOM_LEFT_INFO, " Working...");
         if (read == 3 || read == 4)
         {
             //left
@@ -262,13 +337,14 @@ int ctrl (int level)
         }
         if (read == 9)
         {
+            strcpy (BOTTOM_LEFT_INFO, " Exit");
             stop (1);
-            return 0;
+            return -1;
         }
 
         if (GAMEDIED == 1 || read == 114514)
         {
-            return GAMEWIN;
+            return GAMEWIN ? 0 : -1;
         }
     }
 }
