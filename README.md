@@ -22,6 +22,26 @@ Download the source and type:
 g++ ./main.cpp -o zff -pthread -std=c++11
 ```
 
+# Usage
+
+First, make sure `usr/` folder is there with your executable file.
+
+Second, run the executable file.
+
+Use `Left` `Right` arrow to move the people and `Up` arrow or `SPACE bar` to jump up to reach the exit place `#`.
+
+## Advanced usages
+
+**Args**
+
+- Force open a level: `./Zff level X`
+- Force load a custom world: `./Zff custom WORLDNAME` (the world name is for `/usr/custom/world/XXX`)
+- Get version info: `./Zff version`
+
+**In game**
+
+- Move forcely: type `/pos X Y` to move to `(X, Y)`
+
 # Development
 
 ## App developing
@@ -82,14 +102,6 @@ The following `n` rows with 6 integers `Tx, Ty, Cx, Cy, To, d` in each row.
 - `(Cx, Cy)` for the position that trigger controled.
 - `To` for the ID that trigger changes to.
 - `d` for the delay time of disappear (ms).
-
-# Usage
-
-First, make sure `usr/` folder is there with your executable file.
-
-Second, run the executable file.
-
-Use `Left` `Right` arrow to move the people and `Up` arrow or `SPACE bar` to jump up to reach the exit place `#`.
 
 # FAQ
 
