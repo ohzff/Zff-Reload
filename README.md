@@ -10,16 +10,20 @@ This is a reloaded version of Zff.
 
 ## Windows
 
-Get the `Zff-Windows.exe` from [action builds](https://github.com/ohzff/Zff-Reload/actions).
+Get the `Zff-Windows.exe` from [releases page](https://github.com/ohzff/Zff-Reload/releases).
 
-## MacOS & Linux
+## macOS
+
+Get the `Zff-macOS-*.exe` from [releases page](https://github.com/ohzff/Zff-Reload/releases).
+
+## Linux
 
 > Required `g++`.
 
 Download the source and type:
 
 ```bash
-g++ ./main.cpp -o zff -pthread -std=c++11
+g++ ./main.cpp -o Zff -pthread -std=c++11
 ```
 
 # Usage
@@ -27,6 +31,10 @@ g++ ./main.cpp -o zff -pthread -std=c++11
 First, make sure `usr/` folder is there with your executable file.
 
 Second, run the executable file.
+
+> Double click it in Windows
+
+> Run `./Zff` **in terminal** in macOS and Linux
 
 Use `Left` `Right` arrow to move the people and `Up` arrow or `SPACE bar` to jump up to reach the exit place `#`.
 
