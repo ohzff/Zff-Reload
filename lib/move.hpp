@@ -32,9 +32,9 @@ pair <int, int> _w;
 void windowsize ()
 {
     _w = getWindow ();
-    WINDOW_X = _w.first - 1, WINDOW_Y = _w.second;
-    if (_w.first & 1) {WINDOW_X ++, LASTLINE = true;}
-    else LASTLINE = false;
+    WINDOW_X = _w.first - 2, WINDOW_Y = _w.second;
+    // if (_w.first & 1) {WINDOW_X ++, LASTLINE = true;}
+    // else LASTLINE = false;
     if (WINDOW_Y & 1) WINDOW_Y --;
 }
 
@@ -191,7 +191,10 @@ void update_pos ()
     strcat (BOTTOM_RIGHT_INFO, inttochar (x));
     strcat (BOTTOM_RIGHT_INFO, ", ");
     strcat (BOTTOM_RIGHT_INFO, inttochar (y));
-    strcat (BOTTOM_RIGHT_INFO, ")");
+    strcat (BOTTOM_RIGHT_INFO, ") H");
+    strcat (BOTTOM_RIGHT_INFO, inttochar (WINDOW_X));
+    strcat (BOTTOM_RIGHT_INFO, " W");
+    strcat (BOTTOM_RIGHT_INFO, inttochar (WINDOW_Y)); 
 }
 
 void allinone_protect ()

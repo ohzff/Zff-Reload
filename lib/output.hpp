@@ -97,6 +97,8 @@ inline void print (int i, int j)
     } 
 }
 
+bool kline;
+
 inline void output ()
 {
     printf (" :) ");
@@ -109,10 +111,20 @@ inline void output ()
     {
         wstartx = 1, wendx = n;
         wwaitx = (WINDOW_X - n) >> 1;
+        if ((WINDOW_X - n) & 1) 
+        {
+            kline = true;
+            // wwaitx --;
+        } else kline = false;
     }
     else
     {
-        wstartx = x - (WINDOW_X >> 1), wendx = WINDOW_X + wstartx - 3;
+        wstartx = x - (WINDOW_X >> 1), wendx = WINDOW_X + wstartx - 1;
+        if ((WINDOW_X) & 1) 
+        {
+            // kline = true;
+        } else kline = false;
+        kline = false;
         wwaitx = 0;
     }
     if (WINDOW_Y > m)
@@ -150,7 +162,7 @@ inline void output ()
         for (int j = 1; j <= wwaity; j ++) putchar (' ');
         putchar ('\n');
     }
-    for (int i = 1; i < wwaitx; i ++) {
+    for (int i = 1; i <= wwaitx; i ++) {
         for (int j = 1; j <= WINDOW_Y; j ++) putchar (' ');
         putchar ('\n');
     }
@@ -161,8 +173,12 @@ inline void output ()
         putchar (' ');
     }
     printf ("%s", BOTTOM_RIGHT_INFO);
-    if (!LASTLINE) putchar ('\n');
-    // else for (int i = 1; i < WINDOW_Y; i ++) putchar (' ');
+    // if (!LASTLINE) putchar ('\n');
+    if (kline) 
+    {
+        putchar ('\n');
+        for (int i = 1; i < WINDOW_Y; i ++) putchar (' ');
+    }
 }
 
 
