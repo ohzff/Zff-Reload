@@ -114,16 +114,11 @@ inline void output ()
         if ((WINDOW_X - n) & 1) 
         {
             kline = true;
-            // wwaitx --;
         } else kline = false;
     }
     else
     {
         wstartx = x - (WINDOW_X >> 1), wendx = WINDOW_X + wstartx - 1;
-        if ((WINDOW_X) & 1) 
-        {
-            // kline = true;
-        } else kline = false;
         kline = false;
         wwaitx = 0;
     }
