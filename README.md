@@ -10,16 +10,20 @@ This is a reloaded version of Zff.
 
 ## Windows
 
-Get the `Zff-Windows.exe` from [action builds](https://github.com/ohzff/Zff-Reload/actions).
+Get the `Zff-Windows.exe` from [releases page](https://github.com/ohzff/Zff-Reload/releases).
 
-## MacOS & Linux
+## macOS
+
+Get the `Zff-macOS-*.exe` from [releases page](https://github.com/ohzff/Zff-Reload/releases).
+
+## Linux
 
 > Required `g++`.
 
 Download the source and type:
 
 ```bash
-g++ ./main.cpp -o zff -pthread -std=c++11
+g++ ./main.cpp -o Zff -pthread -std=c++11
 ```
 
 # Usage
@@ -27,6 +31,10 @@ g++ ./main.cpp -o zff -pthread -std=c++11
 First, make sure `usr/` folder is there with your executable file.
 
 Second, run the executable file.
+
+> Double click it in Windows
+
+> Run `./Zff` **in terminal** in macOS and Linux
 
 Use `Left` `Right` arrow to move the people and `Up` arrow or `SPACE bar` to jump up to reach the exit place `#`.
 
@@ -109,6 +117,34 @@ The following `n` rows with 6 integers `Tx, Ty, Cx, Cy, To, d` in each row.
 
 1. Go [here](https://github.com/ohzff/Zff-Reload/releases) to get an zip file `data.zip`.
 2. Unzip it and put `usr/` with your executable file.
+
+# License
+
+This project is under MIT-License.
+
+```
+MIT License
+
+Copyright (c) 2022 LanGong Zff
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
 # More...
 
