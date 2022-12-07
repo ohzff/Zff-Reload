@@ -2,6 +2,8 @@ name: Windows x64 MSVC Build
 
 on:
   push:
+    paths-ignore:
+      - '**.md'
   pull_request:
 
   # Allows you to run this workflow manually from the Actions tab
@@ -28,7 +30,7 @@ jobs:
       # 上传artifacts          
       - uses: actions/upload-artifact@v3
         with:
-          name: Zff-Windows.exe
+          name: Zff-Windows-x86_64.exe
           path: |
             main.exe
             usr/
@@ -39,7 +41,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: main.exe
-          asset_name: Zff-Windows.exe
+          asset_name: Zff-Windows-x86_64.exe
           tag: ${{ github.ref }}
           overwrite: true
 
