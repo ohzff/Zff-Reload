@@ -101,11 +101,11 @@ bool kline;
 
 inline void output ()
 {
+    if (WINDOW_X == 0 || WINDOW_Y == 0) return;
     printf (" :) ");
     for (int i = 1; i <= WINDOW_Y - 5 - strlen (OUTPUT_RIGHT_INFO); i ++) putchar (' ');
     // printf ("%s \n", OUTPUT_RIGHT_INFO);
     puts (OUTPUT_RIGHT_INFO); //putchar (' '); putchar ('\n');
-    if (WINDOW_X == 0 || WINDOW_Y == 0) return;
     int wstartx, wstarty, wendx, wendy, wwaitx, wwaity;
     if (WINDOW_X > n)
     {
@@ -311,6 +311,132 @@ void dooutput ()
     {
         MOVETO (0, 0);
         output ();
+        msleep (OUTPUT_TIME);
+        // msleep (1000000);
+        // syscls ();
+    }
+}
+
+char middleout[50] = "Level Options";
+int oneline, pid, PIDMAX = 1;
+
+void select_print (int i, int j)
+{
+    int k = (i / 3) * oneline + j / 5;
+    if (i % 3 == 1 && k <= PIDMAX)
+    {
+        if (j % 5 == 0 || j % 5 == 4)
+        {
+            if (pid != k) putchar (' ');
+            else putchar ('|');
+        }
+        else
+        {
+            // putchar ('X');
+            if (j % 5 == 1 && (k + 1) > 100)
+            {
+                putchar ((k + 1) / 100 + '0');
+            }
+            else if (j % 5 == 2 && (k + 1) > 10)
+            {
+                putchar (((k + 1) % 100) / 10 + '0');
+            }
+            else if (j % 5 == 3)
+            {
+                putchar (((k + 1) % 10) + '0');
+            }
+            else putchar (' ');
+        }
+    }
+    else
+    {
+        if (pid == k && j % 5 != 0 && j % 5 != 4) putchar ('-');
+        else putchar (' ');
+    }
+}
+
+inline void select_output ()
+{
+    if (WINDOW_X == 0 || WINDOW_Y == 0) return;
+    for (int i = 1; i * 2 <= WINDOW_Y - strlen (middleout); i ++) putchar (' ');
+    printf ("%s", middleout);
+    for (int i = 1; i * 2 <= WINDOW_Y - strlen (middleout); i ++) putchar (' ');
+
+
+    int wstartx, wstarty, wendx, wendy, wwaitx, wwaity;
+    oneline = (WINDOW_Y - 2) / 5;
+    if (WINDOW_X > (PIDMAX / oneline + 1) * 3)
+    {
+        wstartx = 0, wendx = (PIDMAX / oneline + 1) * 3 - 1;
+        wwaitx = (WINDOW_X - (PIDMAX / oneline + 1) * 3) >> 1;
+        if ((WINDOW_X - (PIDMAX / oneline + 1) * 3) & 1)
+        {
+            kline = true;
+        } else kline = false;
+    }
+    else
+    {
+        wstartx = pid / oneline * 3 - (WINDOW_X >> 1), wendx = WINDOW_X + wstartx - 1;
+        kline = false;
+        wwaitx = 0;
+    }
+
+    {
+        wstarty = 0, wendy = oneline * 5 - 1;
+        wwaity = (WINDOW_Y - oneline * 5) >> 1;
+    }
+    
+    for (int i = 1; i <= wwaitx; i ++) {
+        for (int j = 1; j <= WINDOW_Y; j ++) putchar (' ');
+        putchar ('\n');
+    }
+    for (int i = wstartx; i <= wendx; i ++)
+    {
+        if (i < 0 || i >= (PIDMAX / oneline + 1) * 3)
+        {
+            for (int j = 1; j < WINDOW_Y; j ++) putchar (' ');
+            putchar ('\n');
+            continue;
+        } 
+        for (int j = 1; j <= wwaity; j ++) putchar (' ');
+        for (int j = wstarty; j <= wendy; j ++)
+        {
+            if (j < 0 || j >= oneline * 5)
+            {
+                putchar (' ');
+                continue;
+            }
+            select_print (i, j);
+        }
+        for (int j = 1; j <= wwaity; j ++) putchar (' ');
+        putchar ('\n');
+    }
+    for (int i = 1; i <= wwaitx; i ++) {
+        for (int j = 1; j <= WINDOW_Y; j ++) putchar (' ');
+        putchar ('\n');
+    }
+    // for (int i = 1; i <= WINDOW_Y; i ++) putchar (' ');
+
+    printf ("%s", BOTTOM_LEFT_INFO);
+    for (int i = strlen (BOTTOM_LEFT_INFO); i < WINDOW_Y - strlen (BOTTOM_RIGHT_INFO) - 1; i ++)
+    {
+        putchar (' ');
+    }
+    printf ("%s", BOTTOM_RIGHT_INFO);
+    // if (!LASTLINE) putchar ('\n');
+    if (kline) 
+    {
+        putchar ('\n');
+        for (int i = 1; i < WINDOW_Y; i ++) putchar (' ');
+    }
+}
+
+void select_dooutput ()
+{
+    while (SEL_OUTPUT_STOP == 0)
+    {
+        MOVETO (0, 0);
+        select_output ();
         msleep (OUTPUT_TIME);
         // msleep (1000000);
         // syscls ();
