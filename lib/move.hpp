@@ -11,7 +11,7 @@ inline int check(int num){
 	if(num==80||num=='s'||num=='S')return 2;
 	if(num==75||num=='a'||num=='A')return 3;
 	if(num==77||num=='d'||num=='D')return 4;
-	if(num==10)return 13;
+	if(num==10)return 10;
 	if(num==114)return 7;
 	if(num==112)return 8;
 	if(num==113)return 9;
