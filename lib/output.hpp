@@ -318,12 +318,12 @@ void dooutput ()
 }
 
 char middleout[50] = "Level Options";
-int oneline, pid, PIDMAX = 1;
+int oneline, pid, PIDMAX;
 
 void select_print (int i, int j)
 {
     int k = (i / 3) * oneline + j / 5;
-    if (i % 3 == 1 && k <= PIDMAX)
+    if (i % 3 == 1 && k < PIDMAX)
     {
         if (j % 5 == 0 || j % 5 == 4)
         {

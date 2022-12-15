@@ -42,7 +42,7 @@ int readytorun (int &i)
 
 int main (int argc, char * argv[])
 {
-    if (! checkdata ())
+    if (! checkdata (PIDMAX))
     {
         return 1;
     }
@@ -81,7 +81,7 @@ int main (int argc, char * argv[])
     if (k == -1) return 0;
     START = k;
 
-    for (int i = START; i <= 2; i ++)
+    for (int i = START; i <= PIDMAX; i ++)
     {
         read_world (i);
         if (readytorun (i)) break;

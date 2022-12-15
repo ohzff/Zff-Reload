@@ -6,7 +6,7 @@
 #include <sys/stat.h>
 using namespace std;
 
-bool checkdata ()
+bool checkdata (int &count)
 {
     struct stat buffer;   
     if (stat ("usr/world/1/main", &buffer) != 0)
@@ -15,6 +15,9 @@ bool checkdata ()
         printf ("More info: https://github.com/ohzff/Zff-Reload/\n");
         return false;
     }
+    freopen ("usr/world/count", "r", stdin);
+    scanf ("%d", &count);
+    freopen (CONPATH, "r", stdin);
     return true;
 }
 

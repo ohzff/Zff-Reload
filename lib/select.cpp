@@ -19,7 +19,7 @@ int doselect ()
         strcpy (BOTTOM_LEFT_INFO, " Ready");
         strcpy (BOTTOM_RIGHT_INFO, inttochar (pid + 1));
         strcat (BOTTOM_RIGHT_INFO, "/");
-        strcat (BOTTOM_RIGHT_INFO, inttochar (PIDMAX + 1));
+        strcat (BOTTOM_RIGHT_INFO, inttochar (PIDMAX));
         while ((read < 1 || read > 4) && read != 9 && read != 32 && read != '/' && read != 10)
         {
             read = check (keyboard ());
@@ -33,7 +33,7 @@ int doselect ()
         }
         if (read == 4)
         {
-            if (pid < PIDMAX)
+            if (pid < PIDMAX - 1)
             {
                 pid ++;
             }
