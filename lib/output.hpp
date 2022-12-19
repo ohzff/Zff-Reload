@@ -422,7 +422,7 @@ inline void select_output ()
     {
         putchar (' ');
     }
-    printf ("%s", BOTTOM_RIGHT_INFO);
+    printf ("%s ", BOTTOM_RIGHT_INFO);
     // if (!LASTLINE) putchar ('\n');
     if (kline) 
     {
