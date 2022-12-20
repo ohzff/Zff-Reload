@@ -23,12 +23,12 @@ bool checkdata (int &count)
 
 bool check_custom_data (char *name)
 {
-    char *p;
+    char p[200];
     strcpy (p, "usr/custom/world/");
     strcat (p, name);
     strcat (p, "/main");
     struct stat buffer;   
-    if (stat (name, &buffer) != 0)
+    if (stat (p, &buffer) != 0)
     {
         printf ("Cannot read data! Please check 'usr/custom/world' folder.\n");
         printf ("More info: https://github.com/ohzff/Zff-Reload/\n");

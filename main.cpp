@@ -15,7 +15,7 @@ using namespace std;
 #include "lib/checkdata.hpp"
 #include "lib/output.hpp"
 #include "lib/move.hpp"
-#include "lib/select.cpp"
+#include "lib/select.hpp"
 #include "lib/version.hpp"
 
 int readytorun (int &i)
@@ -79,6 +79,14 @@ int main (int argc, char * argv[])
 
     int k = func_select ();
     if (k == -1) return 0;
+    if (k == -2)
+    {
+        if (check_custom_data (ipt)) return 1;
+        read_world (-1, string (ipt));
+        int a = 0;
+        readytorun (a);
+        return 0;
+    }
     START = k;
 
     for (int i = START; i <= PIDMAX; i ++)

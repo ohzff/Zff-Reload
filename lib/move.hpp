@@ -19,6 +19,7 @@ inline int check(int num){
     if(num==32)return 32;
     if(num==127)return 127;
     if(num=='/')return num;
+    if(num=='l')return num;
     if(num==224||num==-32||num == 91)return -1;
 	return 0;
 }
@@ -246,7 +247,7 @@ void command ()
     {
         int read = keyboard ();
         if (read == 27) return;
-        if (read == 127)
+        if (read == 127 && strlen (BOTTOM_LEFT_INFO) > 1)
         {
             BOTTOM_LEFT_INFO[strlen (BOTTOM_LEFT_INFO) - 1] = '\0';
         }
@@ -274,7 +275,7 @@ void command ()
                         return;
                     }
                 }
-                strcpy (BOTTOM_LEFT_INFO, "ERROR");
+                strcpy (BOTTOM_LEFT_INFO, " Error");
                 msleep (OUTPUT_TIME * 1000);
                 return;
             }

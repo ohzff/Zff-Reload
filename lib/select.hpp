@@ -10,6 +10,43 @@ void sel_windowsize_protect ()
     }
 }
 
+char ipt[100];
+
+int sel_command ()
+{
+    strcpy (ipt, "");
+    while (true)
+    {
+        int read = keyboard ();
+        if (read == 27) return 0;
+        if (read == 127 && strlen (ipt) > 0)
+        {
+            ipt[strlen (ipt) - 1] = '\0';
+            BOTTOM_LEFT_INFO[strlen (BOTTOM_LEFT_INFO) - 1] = '\0';
+        }
+        else if ((read >= 'a' && read <= 'z') || (read >= '0' && read <= '9') || read == ' ')
+        {
+            char tmp[2] = {char (read)};
+            strcat (ipt, tmp);
+            strcat (BOTTOM_LEFT_INFO, tmp);
+        }
+        else if (read == 10)
+        {
+            if (check_custom_data (ipt))
+            {
+                return 1;
+            }
+            else
+            {
+                strcpy (BOTTOM_LEFT_INFO, " Error");
+                msleep (OUTPUT_TIME * 1000);
+                return 0;
+            }
+        }
+    }
+    return 0;
+}
+
 int doselect ()
 {
     int read;
@@ -20,9 +57,17 @@ int doselect ()
         strcpy (BOTTOM_RIGHT_INFO, inttochar (pid + 1));
         strcat (BOTTOM_RIGHT_INFO, "/");
         strcat (BOTTOM_RIGHT_INFO, inttochar (PIDMAX));
-        while ((read < 1 || read > 4) && read != 9 && read != 32 && read != '/' && read != 10)
+        while ((read < 1 || read > 4) && read != 9 && read != 32 && read != 'l' && read != 10)
         {
             read = check (keyboard ());
+        }
+        if (read == 'l')
+        {
+            strcpy (BOTTOM_LEFT_INFO, " Load: ");
+            if (sel_command () == 1)
+            {
+                return -2;
+            }
         }
         if (read == 3)
         {
@@ -82,6 +127,7 @@ int func_select ()
     SEL_OUTPUT_STOP = 1;
 
     if (k == -1) return -1;
+    else if (k == -2) return -2;
     else return pid + 1;
 }
 
