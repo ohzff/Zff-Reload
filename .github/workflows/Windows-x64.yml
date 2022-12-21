@@ -25,8 +25,10 @@ jobs:
           ${{ steps.setup.outputs.gxx }} main.cpp -o main.exe -std=c++11 -static-libgcc -static-libstdc++ -L.
       # Runs a single command using the runners shell
       - name: Check file
-        run: dir
-            # tag 查询github-Release
+        run: |
+          copy main.exe Zff-Windows-x86_64.exe
+          dir
+      # tag 查询github-Release
       # 上传artifacts          
       - uses: actions/upload-artifact@v3
         with:
@@ -34,14 +36,17 @@ jobs:
           path: |
             main.exe
             usr/
+      - uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r win64.zip Zff-Windows-x86_64.exe usr LICENCE README.md
       # tag 上传Release
       - name: upload Release
         if: startsWith(github.event.ref, 'refs/tags/')
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: main.exe
-          asset_name: Zff-Windows-x86_64.exe
+          file: win64.zip
+          asset_name: Zff-Windows-x86_64.zip
           tag: ${{ github.ref }}
           overwrite: true
 

@@ -14,8 +14,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: make
       run: make main
-    - name: check
-      run: ls
+    - name: check and rename
+      run: |
+        cp main Zff-macOS-x86_64
+        ls
       # tag 查询github-Release
       # 上传artifacts          
     - uses: actions/upload-artifact@v3
@@ -24,13 +26,16 @@ jobs:
         path: |
           main
           usr/
+    - uses: montudor/action-zip@v1
+      with:
+        args: zip -qq -r mac.zip Zff-macOS-x86_64 usr LICENCE README.md
     # tag 上传Release
     - name: uploadRelease
       if: startsWith(github.event.ref, 'refs/tags/')
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: main
-        asset_name: Zff-macOS-x86_64
+        file: mac.zip
+        asset_name: Zff-macOS-x86_64.zip
         tag: ${{ github.ref }}
         overwrite: true

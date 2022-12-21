@@ -15,7 +15,9 @@ jobs:
     - name: gcc
       run: g++ ./main.cpp -o main -pthread
     - name: check
-      run: ls
+      run: |
+        cp main Zff-Ubuntu-x86_64
+        ls
       # tag 查询github-Release
       # 上传artifacts          
     - uses: actions/upload-artifact@v3
@@ -28,13 +30,16 @@ jobs:
     - uses: montudor/action-zip@v1
       with:
         args: zip -qq -r data.zip usr
+    - uses: montudor/action-zip@v1
+      with:
+        args: zip -qq -r linux.zip Zff-Ubuntu-x86_64 usr LICENCE README.md
     - name: uploadRelease
       if: startsWith(github.event.ref, 'refs/tags/')
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: main
-        asset_name: Zff-Ubuntu
+        file: linux.zip
+        asset_name: Zff-Ubuntu-x86_64.zip
         tag: ${{ github.ref }}
         overwrite: true
     - name: upload Release (usr/ data)
