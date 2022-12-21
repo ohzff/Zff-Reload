@@ -38,7 +38,7 @@ jobs:
             usr/
       - name: 7z
         run: |
-          wget https://www.7-zip.org/a/7zr.exe
+          Invoke-WebRequest https://www.7-zip.org/a/7zr.exe -O 7zr.exe
           .\7zr.exe a win64.zip Zff-Windows-x86_64.exe usr LICENCE README.md
       # tag 上传Release
       - name: upload Release
