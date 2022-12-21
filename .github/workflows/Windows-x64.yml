@@ -37,8 +37,8 @@ jobs:
             main.exe
             usr/
       - uses: edgarrc/action-7z@v1
-      with:
-        args: 7z a win64.zip Zff-Windows-x86_64.exe usr LICENCE README.md
+        with:
+          args: 7z a win64.zip Zff-Windows-x86_64.exe usr LICENCE README.md
       # tag 上传Release
       - name: upload Release
         if: startsWith(github.event.ref, 'refs/tags/')
