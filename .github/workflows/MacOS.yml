@@ -28,7 +28,7 @@ jobs:
           usr/
     - name: zip
       run: |
-        zip -vr folder.zip mac.zip Zff-macOS-x86_64 usr LICENCE README.md -x "*.DS_Store"
+        zip -vr mac.zip Zff-macOS-x86_64 usr LICENCE README.md -x "*.DS_Store"
     # tag 上传Release
     - name: uploadRelease
       if: startsWith(github.event.ref, 'refs/tags/')
