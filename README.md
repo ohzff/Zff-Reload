@@ -18,11 +18,21 @@ Get the `Zff-Windows.exe` from [releases page](https://github.com/ohzff/Zff-Relo
 
 ## macOS
 
-Get the `Zff-macOS-*.exe` from [releases page](https://github.com/ohzff/Zff-Reload/releases).
+**Way 1: Install to your system**
+
+[See here](https://github.com/ohzff/install/blob/main/README.md#zff-reload).
+
+**Way 2**
+
+Get the `Zff-macOS-*` from [releases page](https://github.com/ohzff/Zff-Reload/releases).
 
 ## Linux
 
-> Required `g++`.
+**Way 1: Install to your system**
+
+[See here](https://github.com/ohzff/install/blob/main/README.md#zff-reload).
+
+**Way 2**
 
 Download the source and type:
 
@@ -46,9 +56,11 @@ Use `Left` `Right` arrow to move the people and `Up` arrow or `SPACE bar` to jum
 
 **Args**
 
-- Force open a level: `./Zff level X`
-- Force load a custom world: `./Zff custom WORLDNAME` (the world name is for `/usr/custom/world/XXX`)
 - Get version info: `./Zff version`
+
+**In Level Selection**
+
+- Press `l` to load custom world.
 
 **In game**
 
