@@ -6,9 +6,7 @@ This is a reloaded version of Zff.
 
 **Notice: Developing now!**
 
-
 https://user-images.githubusercontent.com/59787082/207616790-4089fd40-3a93-4bc8-96ef-af630abb0d3d.mov
-
 
 # Getting started
 
@@ -41,6 +39,8 @@ g++ ./main.cpp -o Zff -pthread -std=c++11
 ```
 
 # Usage
+
+> **Notice for Windows Users:** You may need to make the terminal smmaller than 80x80.
 
 First, make sure `usr/` folder is there with your executable file.
 
