@@ -8,14 +8,17 @@ using namespace std;
 
 bool checkdata (int &count)
 {
-    struct stat buffer;   
-    if (stat ("usr/world/1/main", &buffer) != 0)
+    struct stat buffer;
+    char testpath[200];
+    printf ("Reading usr/ from \"%s\"...\n", DATAPATH);
+    if (stat (getdatapath ("usr/world/1/main"), &buffer) != 0)
     {
         printf ("Cannot read data! Please give 'usr/' folder to me.\n");
         printf ("More info: https://github.com/ohzff/Zff-Reload/\n");
+        printf ("    INFO: datapath = \"%s\".\n", DATAPATH);
         return false;
     }
-    freopen ("usr/world/count", "r", stdin);
+    freopen (getdatapath ("usr/world/count"), "r", stdin);
     scanf ("%d", &count);
     freopen (CONPATH, "r", stdin);
     return true;
@@ -24,7 +27,7 @@ bool checkdata (int &count)
 bool check_custom_data (char *name)
 {
     char p[200];
-    strcpy (p, "usr/custom/world/");
+    strcpy (p, getdatapath ("usr/custom/world/"));
     strcat (p, name);
     strcat (p, "/main");
     struct stat buffer;   

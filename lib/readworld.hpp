@@ -7,9 +7,6 @@
 const char readpath[100] = "usr/world/";
 const char custompath[100] = "usr/custom/world/";
 
-// char charfield[1005][1005];
-// string str;
-
 char* inttochar (int x)
 {
     static char str[100];
@@ -25,34 +22,34 @@ void read_world (int id, string custom = "")
 
     if (id == -1)
     {
-        strcat (main_path, custompath);
+        strcat (main_path, getdatapath (custompath));
         strcat (main_path, custom.c_str ());
         strcat (main_path, "/main");
 
-        strcat (world_path, custompath);
+        strcat (world_path, getdatapath (custompath));
         strcat (world_path, custom.c_str ());
         strcat (world_path, "/world");
 
-        strcat (trigger_path, custompath);
+        strcat (trigger_path, getdatapath (custompath));
         strcat (trigger_path, custom.c_str ());
         strcat (trigger_path, "/trigger");
     }
     else
     {
-        strcat (main_path, readpath);
+        strcat (main_path, getdatapath (readpath));
         strcat (main_path, inttochar (id));
         strcat (main_path, "/main");
 
-        strcat (world_path, readpath);
+        strcat (world_path, getdatapath (readpath));
         strcat (world_path, inttochar (id));
         strcat (world_path, "/world");
 
-        strcat (trigger_path, readpath);
+        strcat (trigger_path, getdatapath (readpath));
         strcat (trigger_path, inttochar (id));
         strcat (trigger_path, "/trigger");
     }
 
-    printf ("Reading data from...\n");
+    printf ("Reading data...\n");
 
     memset (trigger, 0, sizeof (trigger));
     memset (field, 0, sizeof (field));

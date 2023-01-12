@@ -8,6 +8,7 @@
 
 using namespace std;
 
+#include "lib/system/data/DATA.hpp"
 #include "lib/system.hpp"
 #include "lib/struct-define.hpp"
 
@@ -42,16 +43,11 @@ int readytorun (int &i)
 
 int main (int argc, char * argv[])
 {
-    if (! checkdata (PIDMAX))
-    {
-        return 1;
-    }
-
     int START = 1;
 
     if (argc > 1)
     {
-        if (strcmp (argv[1], "level") == 0 && argc > 2)
+        /*if (strcmp (argv[1], "level") == 0 && argc > 2)
         {
             char name[500];
             strcpy (name, argv[2]);
@@ -65,7 +61,8 @@ int main (int argc, char * argv[])
             int a = 0;
             readytorun (a);
         }
-        else if (strcmp (argv[1], "version") == 0)
+        else */
+        if (strcmp (argv[1], "version") == 0)
         {
             version_output ();
             return 0;
@@ -75,6 +72,11 @@ int main (int argc, char * argv[])
             printf ("Command not found!\n");
             return 1;
         }
+    }
+
+    if (! checkdata (PIDMAX))
+    {
+        return 1;
     }
 
     int k = func_select ();

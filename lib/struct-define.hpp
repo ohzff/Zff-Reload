@@ -67,4 +67,20 @@ char OUTPUT_RIGHT_INFO[1000], BOTTOM_LEFT_INFO[1000], BOTTOM_RIGHT_INFO[1000];
 
 int OUTPUT_STOP = 0, SEL_OUTPUT_STOP = 0;
 
+inline char * getdatapath (char *x)
+{
+    char tmp[200];
+    strcpy (tmp, DATAPATH);
+    strcat (tmp, x);
+    return tmp;
+}
+
+inline char * getdatapath (const char x[])
+{
+    char tmp[200];
+    strcpy (tmp, DATAPATH);
+    strcat (tmp, x);
+    return tmp;
+}
+
 #endif
