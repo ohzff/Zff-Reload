@@ -14,29 +14,27 @@ https://user-images.githubusercontent.com/59787082/207616790-4089fd40-3a93-4bc8-
 
 Get the `Zff-Windows.exe` from [releases page](https://github.com/ohzff/Zff-Reload/releases).
 
-## macOS
+## macOS & Linux
 
-**Way 1: Install to your system**
-
-[See here](https://github.com/ohzff/install/blob/main/README.md#zff-reload).
-
-**Way 2**
-
-Get the `Zff-macOS-*` from [releases page](https://github.com/ohzff/Zff-Reload/releases).
-
-## Linux
-
-**Way 1: Install to your system**
-
-[See here](https://github.com/ohzff/install/blob/main/README.md#zff-reload).
-
-**Way 2**
-
-Download the source and type:
+Download `linux.sh` from folder `zff-reload/`.
 
 ```bash
-g++ ./main.cpp -o Zff -pthread -std=c++11
+curl https://raw.githubusercontent.com/ohzff/install/main/zff-reload/linux.sh > linux.sh
 ```
+
+Change file modes to `execute bits`.
+
+```bash
+chmod +x ./linux.sh
+```
+
+Then, run it.
+
+```bash
+./linux.sh
+```
+
+[Get more information from here](https://github.com/ohzff/install/blob/main/README.md#zff-reload).
 
 # Usage
 
