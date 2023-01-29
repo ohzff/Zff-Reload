@@ -45,8 +45,13 @@ void msleep (long x)
 #define HIDE_CURSOR() printf("\033[?25l")
  
 // 显示光标
-#define SHOW_CURSOR() printf("\033[?25h")
- 
+// #define SHOW_CURSOR() printf("\033[?25h")
+void SHOW_CURSOR()
+{
+    printf ("\033[?25h");
+    system ("stty echo");
+}
+
 //清除从光标到行尾的内容
 #define CLEAR_LINE() printf("\033[K")
 //反显
