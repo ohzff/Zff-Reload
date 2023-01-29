@@ -12,7 +12,23 @@ https://user-images.githubusercontent.com/59787082/207616790-4089fd40-3a93-4bc8-
 
 ## Windows
 
-Get the `Zff-Windows.exe` from [releases page](https://github.com/ohzff/Zff-Reload/releases).
+Get the `Zff-Windows-*.zip` from [releases page](https://github.com/ohzff/Zff-Reload/releases).
+
+## Ubuntu
+
+Get the `Zff-Ubuntu.deb` from [releases page](https://github.com/ohzff/Zff-Reload/releases).
+
+```bash
+sudo dpkg -i ./Zff-Ubuntu.deb
+```
+
+> Architecture: `all`
+
+## ArchLinux
+
+Download from [AUR](https://aur.archlinux.org/packages/zff-reload).
+
+You can use package manager such as `yay`, `yaourt` to download AUR packages.
 
 ## macOS & Linux
 
@@ -46,7 +62,7 @@ Second, run the executable file.
 
 > Double click it in Windows
 
-> Run `./Zff` **in terminal** in macOS and Linux
+> Run `./Zff` or `zff` **in terminal** in macOS and Linux
 
 Use `Left` `Right` arrow to move the people and `Up` arrow or `SPACE bar` to jump up to reach the exit place `#`.
 
@@ -54,7 +70,7 @@ Use `Left` `Right` arrow to move the people and `Up` arrow or `SPACE bar` to jum
 
 **Args**
 
-- Get version info: `./Zff version`
+- Get version info: `zff version` or `./Zff version`
 
 **In Level Selection**
 
