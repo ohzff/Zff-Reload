@@ -7,46 +7,53 @@
 const char readpath[100] = "usr/world/";
 const char custompath[100] = "usr/custom/world/";
 
-char* inttochar (int x)
+inline string inttochar (int x)
 {
-    static char str[100];
-    sprintf (str, "%d", x);
-    return str;
+    return to_string (x);
 }
 
 void read_world (int id, string custom = "")
 {
-    char main_path[200] = "";
-    char world_path[200] = "";
-    char trigger_path[200] = "";
+    // char main_path[200] = "";
+    // char world_path[200] = "";
+    // char trigger_path[200] = "";
+    string mainpath, worldpath, triggerpath;
 
     if (id == -1)
     {
-        strcat (main_path, getdatapath (custompath));
-        strcat (main_path, custom.c_str ());
-        strcat (main_path, "/main");
+        // strcat (main_path, getdatapath (custompath).c_str ());
+        // strcat (main_path, custom.c_str ());
+        // strcat (main_path, "/main");
 
-        strcat (world_path, getdatapath (custompath));
-        strcat (world_path, custom.c_str ());
-        strcat (world_path, "/world");
+        // strcat (world_path, getdatapath (custompath).c_str ());
+        // strcat (world_path, custom.c_str ());
+        // strcat (world_path, "/world");
 
-        strcat (trigger_path, getdatapath (custompath));
-        strcat (trigger_path, custom.c_str ());
-        strcat (trigger_path, "/trigger");
+        // strcat (trigger_path, getdatapath (custompath).c_str ());
+        // strcat (trigger_path, custom.c_str ());
+        // strcat (trigger_path, "/trigger");
+
+        mainpath = getdatapath (custompath) + custom + "/main";
+        worldpath = getdatapath (custompath) + custom + "/world";
+        triggerpath = getdatapath (custompath) + custom + "/trigger";
     }
     else
     {
-        strcat (main_path, getdatapath (readpath));
-        strcat (main_path, inttochar (id));
-        strcat (main_path, "/main");
+        // strcat (main_path, getdatapath (readpath).c_str ());
+        // strcat (main_path, inttochar (id).c_str ());
+        // strcat (main_path, "/main");
 
-        strcat (world_path, getdatapath (readpath));
-        strcat (world_path, inttochar (id));
-        strcat (world_path, "/world");
+        // strcat (world_path, getdatapath (readpath).c_str ());
+        // strcat (world_path, inttochar (id).c_str ());
+        // strcat (world_path, "/world");
 
-        strcat (trigger_path, getdatapath (readpath));
-        strcat (trigger_path, inttochar (id));
-        strcat (trigger_path, "/trigger");
+        // strcat (trigger_path, getdatapath (readpath).c_str ());
+        // strcat (trigger_path, inttochar (id).c_str ());
+        // strcat (trigger_path, "/trigger");
+
+        mainpath = getdatapath (readpath) + inttochar (id) + "/main";
+        worldpath = getdatapath (readpath) + inttochar (id) + "/world";
+        triggerpath = getdatapath (readpath) + inttochar (id) + "/trigger";
     }
 
     printf ("Reading data...\n");
@@ -55,16 +62,16 @@ void read_world (int id, string custom = "")
     memset (field, 0, sizeof (field));
     triggerCount = 0, OUTPUT_STOP = 0;
 
-    printf ("%s\n", main_path);
-    printf ("%s\n", world_path);
-    printf ("%s\n", trigger_path);
+    printf ("%s\n", mainpath.c_str ());
+    printf ("%s\n", worldpath.c_str ());
+    printf ("%s\n", triggerpath.c_str ());
 
-    freopen (main_path, "r", stdin);
+    freopen (mainpath.c_str (), "r", stdin);
     scanf ("%d%d", &n, &m);
     scanf ("%d%d%d%d", &sx, &sy, &ex, &ey);
     printf ("N=%d, M=%d\n", n, m);
 
-    freopen (world_path, "r", stdin);
+    freopen (worldpath.c_str (), "r", stdin);
     // memset (charfield, 0, sizeof (charfield));
     for (int i = 1; i <= n; i ++)
     {
@@ -112,7 +119,7 @@ void read_world (int id, string custom = "")
         }
     }
 
-    freopen (trigger_path, "r", stdin);
+    freopen (triggerpath.c_str (), "r", stdin);
     scanf ("%d", &triggerCount);
     for (int i = 1; i <= triggerCount; i ++)
     {

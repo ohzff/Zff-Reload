@@ -186,13 +186,13 @@ void move_left_right (int t)
 void update_pos ()
 {
     strcpy (BOTTOM_RIGHT_INFO, "(");
-    strcat (BOTTOM_RIGHT_INFO, inttochar (x));
+    strcat (BOTTOM_RIGHT_INFO, inttochar (x).c_str ());
     strcat (BOTTOM_RIGHT_INFO, ", ");
-    strcat (BOTTOM_RIGHT_INFO, inttochar (y));
+    strcat (BOTTOM_RIGHT_INFO, inttochar (y).c_str ());
     strcat (BOTTOM_RIGHT_INFO, ") H");
-    strcat (BOTTOM_RIGHT_INFO, inttochar (WINDOW_X));
+    strcat (BOTTOM_RIGHT_INFO, inttochar (WINDOW_X).c_str ());
     strcat (BOTTOM_RIGHT_INFO, " W");
-    strcat (BOTTOM_RIGHT_INFO, inttochar (WINDOW_Y)); 
+    strcat (BOTTOM_RIGHT_INFO, inttochar (WINDOW_Y).c_str ()); 
 }
 
 void allinone_protect ()
@@ -290,7 +290,7 @@ int ctrl (int level)
     memset (trig_status, 0, sizeof (trig_status));
     memset (trig_delay, 0, sizeof (trig_delay));
     strcpy (OUTPUT_RIGHT_INFO, "Level ");
-    strcat (OUTPUT_RIGHT_INFO, inttochar (level));
+    strcat (OUTPUT_RIGHT_INFO, inttochar (level).c_str ());
 
     thread allinone_thread (allinone_protect);
     // thread window_thread (windowsize_protect);

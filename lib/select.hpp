@@ -54,9 +54,9 @@ int doselect ()
     {
         read = 0;
         strcpy (BOTTOM_LEFT_INFO, " Ready");
-        strcpy (BOTTOM_RIGHT_INFO, inttochar (pid + 1));
+        strcpy (BOTTOM_RIGHT_INFO, inttochar (pid + 1).c_str ());
         strcat (BOTTOM_RIGHT_INFO, "/");
-        strcat (BOTTOM_RIGHT_INFO, inttochar (PIDMAX));
+        strcat (BOTTOM_RIGHT_INFO, inttochar (PIDMAX).c_str ());
         while ((read < 1 || read > 4) && read != 9 && read != 32 && read != 'l' && read != 10)
         {
             read = check (keyboard ());
