@@ -293,17 +293,9 @@ int ctrl (int level)
     strcat (OUTPUT_RIGHT_INFO, inttochar (level).c_str ());
 
     thread allinone_thread (allinone_protect);
-    // thread window_thread (windowsize_protect);
     thread g_thread (move_g_protect);
-    // thread pos_thread (pos_legal_protect);
-    // thread trigger_enable_thread (trigger_enable_protect);
-    // thread trigger_disable_thread (trigger_disable_protect);
     allinone_thread.detach ();
-    // window_thread.detach ();
     g_thread.detach ();
-    // pos_thread.detach ();
-    // trigger_enable_thread.detach ();
-    // trigger_disable_thread.detach ();
 
     int read;
     while (true)
@@ -313,8 +305,6 @@ int ctrl (int level)
         while ((read < 1 || read > 4) && read != 9 && read != 32 && read != '/')
         {
             read = check (keyboard ());
-            // read = keyverify ();
-            // read = 1;
             if (GAMEDIED == 1)
             {
                 read = 114514;

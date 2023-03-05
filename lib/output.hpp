@@ -5,56 +5,6 @@
 
 int WINDOW_X, WINDOW_Y, LASTLINE;
 
-/*
-inline void output ()
-{
-    for (int i = 1; i <= n; i ++)
-    {
-        for (int j = 1; j <= m; j ++)
-        {
-            switch (field[i][j].user)
-            {
-            case 0:
-                // free
-                putchar (' ');
-                break;
-            
-            case 1:
-                // H
-                printf ("H");
-                break;
-
-            case 2:
-                // -
-                printf ("-");
-                break;
-            
-            case 3:
-                // |
-                printf ("|");
-                break;
-            
-            case 4:
-                // trigger
-                printf ("*");
-                break;
-
-            case 5:
-                // End
-                printf ("#");
-                break;
-
-            default:
-                printf ("?");
-                break;
-            } 
-        }
-        putchar ('\n');
-    }
-}
-
-*/
-
 inline void print (int i, int j)
 {
     switch (field[i][j].user)
@@ -67,7 +17,6 @@ inline void print (int i, int j)
     
     case 1:
         // H
-        // printf ("H");
         putchar ('H');
         break;
 
@@ -105,7 +54,6 @@ inline void output ()
     printf (" :) ");
     for (int i = 1; i <= WINDOW_Y - 5 - strlen (OUTPUT_RIGHT_INFO); i ++) putchar (' ');
     printf ("%s \n", OUTPUT_RIGHT_INFO);
-    // puts (OUTPUT_RIGHT_INFO); //putchar (' '); putchar ('\n');
     int wstartx, wstarty, wendx, wendy, wwaitx, wwaity;
     if (WINDOW_X > n)
     {
@@ -161,14 +109,12 @@ inline void output ()
         for (int j = 1; j <= WINDOW_Y; j ++) putchar (' ');
         putchar ('\n');
     }
-    // for (int i = 1; i <= WINDOW_Y; i ++) putchar (' ');
     printf ("%s", BOTTOM_LEFT_INFO);
     for (int i = strlen (BOTTOM_LEFT_INFO); i < WINDOW_Y - strlen (BOTTOM_RIGHT_INFO) - 1; i ++)
     {
         putchar (' ');
     }
     printf ("%s ", BOTTOM_RIGHT_INFO);
-    // if (!LASTLINE) putchar ('\n');
     if (kline) 
     {
         putchar ('\n');
@@ -332,7 +278,6 @@ void select_print (int i, int j)
         }
         else
         {
-            // putchar ('X');
             if (j % 5 == 1 && (k + 1) > 100)
             {
                 putchar ((k + 1) / 100 + '0');
@@ -415,7 +360,6 @@ inline void select_output ()
         for (int j = 1; j <= WINDOW_Y; j ++) putchar (' ');
         putchar ('\n');
     }
-    // for (int i = 1; i <= WINDOW_Y; i ++) putchar (' ');
 
     printf ("%s", BOTTOM_LEFT_INFO);
     for (int i = strlen (BOTTOM_LEFT_INFO); i < WINDOW_Y - strlen (BOTTOM_RIGHT_INFO) - 1; i ++)
@@ -423,7 +367,6 @@ inline void select_output ()
         putchar (' ');
     }
     printf ("%s ", BOTTOM_RIGHT_INFO);
-    // if (!LASTLINE) putchar ('\n');
     if (kline) 
     {
         putchar ('\n');
@@ -438,8 +381,6 @@ void select_dooutput ()
         MOVETO (0, 0);
         select_output ();
         msleep (OUTPUT_TIME);
-        // msleep (1000000);
-        // syscls ();
     }
 }
 

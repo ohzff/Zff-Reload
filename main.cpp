@@ -43,25 +43,8 @@ int readytorun (int &i)
 
 int main (int argc, char * argv[])
 {
-    int START = 1;
-
     if (argc > 1)
     {
-        /*if (strcmp (argv[1], "level") == 0 && argc > 2)
-        {
-            char name[500];
-            strcpy (name, argv[2]);
-            sscanf (name, "%d", &START);
-            printf ("Done.\n");
-        }
-        else if (strcmp (argv[1], "custom") == 0 && argc > 2)
-        {
-            if (check_custom_data (argv[2])) return 1;
-            read_world (-1, string (argv[2]));
-            int a = 0;
-            readytorun (a);
-        }
-        else */
         if (strcmp (argv[1], "version") == 0)
         {
             version_output ();
@@ -89,9 +72,8 @@ int main (int argc, char * argv[])
         readytorun (a);
         return 0;
     }
-    START = k;
 
-    for (int i = START; i <= PIDMAX; i ++)
+    for (int i = k; i <= PIDMAX; i ++)
     {
         read_world (i);
         if (readytorun (i)) break;

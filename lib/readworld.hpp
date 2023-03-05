@@ -14,43 +14,16 @@ inline string inttochar (int x)
 
 void read_world (int id, string custom = "")
 {
-    // char main_path[200] = "";
-    // char world_path[200] = "";
-    // char trigger_path[200] = "";
     string mainpath, worldpath, triggerpath;
 
     if (id == -1)
     {
-        // strcat (main_path, getdatapath (custompath).c_str ());
-        // strcat (main_path, custom.c_str ());
-        // strcat (main_path, "/main");
-
-        // strcat (world_path, getdatapath (custompath).c_str ());
-        // strcat (world_path, custom.c_str ());
-        // strcat (world_path, "/world");
-
-        // strcat (trigger_path, getdatapath (custompath).c_str ());
-        // strcat (trigger_path, custom.c_str ());
-        // strcat (trigger_path, "/trigger");
-
         mainpath = getdatapath (custompath) + custom + "/main";
         worldpath = getdatapath (custompath) + custom + "/world";
         triggerpath = getdatapath (custompath) + custom + "/trigger";
     }
     else
     {
-        // strcat (main_path, getdatapath (readpath).c_str ());
-        // strcat (main_path, inttochar (id).c_str ());
-        // strcat (main_path, "/main");
-
-        // strcat (world_path, getdatapath (readpath).c_str ());
-        // strcat (world_path, inttochar (id).c_str ());
-        // strcat (world_path, "/world");
-
-        // strcat (trigger_path, getdatapath (readpath).c_str ());
-        // strcat (trigger_path, inttochar (id).c_str ());
-        // strcat (trigger_path, "/trigger");
-
         mainpath = getdatapath (readpath) + inttochar (id) + "/main";
         worldpath = getdatapath (readpath) + inttochar (id) + "/world";
         triggerpath = getdatapath (readpath) + inttochar (id) + "/trigger";
@@ -72,31 +45,10 @@ void read_world (int id, string custom = "")
     printf ("N=%d, M=%d\n", n, m);
 
     freopen (worldpath.c_str (), "r", stdin);
-    // memset (charfield, 0, sizeof (charfield));
     for (int i = 1; i <= n; i ++)
     {
-        // charfield[i][0] = '\n';
-        // cin.get (charfield[i], 1005);
-        // printf ("%d\n", strlen (charfield[i]));
-        // string str;
-        // getline (cin, str);
-        
-        // if ()
-
-        // printf ("%d\n", str.length ());
-        // getchar ();
-
-        // char str[inf];
-        // for (int j )
-
         for (int j = 1;j <= m; j ++)
         {
-            // charfield[i][j] = getchar ();
-            // if (charfield[i][j] == '\n' || charfield[i][j] == '\0')
-            // {
-            //     printf ("%d\n", j);
-            //     break;
-            // }
             char ch;
             scanf ("%c", &ch);
             if (ch == '\n' || ch == '\0'){ i--; break; }
