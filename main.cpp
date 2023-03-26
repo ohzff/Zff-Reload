@@ -11,13 +11,13 @@ using namespace std;
 #include "lib/system/data/DATA.hpp"
 #include "lib/system.hpp"
 #include "lib/struct-define.hpp"
+#include "lib/version.hpp"
 
 #include "lib/readworld.hpp"
 #include "lib/checkdata.hpp"
 #include "lib/output.hpp"
 #include "lib/move.hpp"
 #include "lib/select.hpp"
-#include "lib/version.hpp"
 
 int readytorun (int &i)
 {
@@ -41,6 +41,37 @@ int readytorun (int &i)
     return 0;
 }
 
+int adventure ()
+{
+    int k = SelectFunc::func_select ();
+    if (k == -1) return 0;
+    if (k == -2)
+    {
+        if (check_custom_data (SelectFunc::ipt)) return 1;
+        read_world (-1, string (SelectFunc::ipt));
+        int a = 0;
+        readytorun (a);
+        return 0;
+    }
+
+    for (int i = k; i <= SelectOutput::PIDMAX; i ++)
+    {
+        read_world (i);
+        if (readytorun (i)) break;
+    }
+    SHOW_CURSOR ();
+    return 0;
+}
+
+int chapter_start ()
+{
+    int k = ChapterFunc::func_chapter ();
+    if (k == -1) return 0;
+    if (k == 1) return adventure ();
+    if (k == 2) return 6;
+    return 0;
+}
+
 int main (int argc, char * argv[])
 {
     if (argc > 1)
@@ -57,27 +88,10 @@ int main (int argc, char * argv[])
         }
     }
 
-    if (! checkdata (PIDMAX))
+    if (! checkdata (SelectOutput::PIDMAX))
     {
         return 1;
     }
 
-    int k = func_select ();
-    if (k == -1) return 0;
-    if (k == -2)
-    {
-        if (check_custom_data (ipt)) return 1;
-        read_world (-1, string (ipt));
-        int a = 0;
-        readytorun (a);
-        return 0;
-    }
-
-    for (int i = k; i <= PIDMAX; i ++)
-    {
-        read_world (i);
-        if (readytorun (i)) break;
-    }
-    SHOW_CURSOR ();
-    return 0;
+    return chapter_start ();
 }

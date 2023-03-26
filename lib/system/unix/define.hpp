@@ -89,4 +89,4 @@ pair <int, int> getWindow ()
     return pair <int,int> (w.ws_row, w.ws_col);
 }
 
-#define putchar(x) putchar_unlocked(x)
+// #define putchar(x) putchar_unlocked(x)

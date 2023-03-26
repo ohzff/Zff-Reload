@@ -65,7 +65,7 @@ int trig_delay[inf * 10];
 int x, y;
 char OUTPUT_RIGHT_INFO[1000], BOTTOM_LEFT_INFO[1000], BOTTOM_RIGHT_INFO[1000];
 
-int OUTPUT_STOP = 0, SEL_OUTPUT_STOP = 0;
+int OUTPUT_STOP = 0, SEL_OUTPUT_STOP = 0, CHAPTER_OUTPUT_STOP = 0;
 
 inline string getdatapath (char *x)
 {
