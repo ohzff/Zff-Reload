@@ -17,6 +17,7 @@ using namespace std;
 #include "lib/checkdata.hpp"
 #include "lib/output.hpp"
 #include "lib/move.hpp"
+#include "lib/endless.hpp"
 #include "lib/select.hpp"
 
 int readytorun (int &i)
@@ -27,9 +28,9 @@ int readytorun (int &i)
     thread output_thread (dooutput);
     output_thread.detach ();
 
-    OUTPUT_STOP = 0, GAMEDIED = 0, GAMEWIN = 0;
+    OUTPUT_STOP = 0, AdventureMove::GAMEDIED = 0, AdventureMove::GAMEWIN = 0;
 
-    int k = ctrl (i);
+    int k = AdventureMove::ctrl (i);
     if (k == -1) return 1;
     if (k != 0)
     {
@@ -63,12 +64,28 @@ int adventure ()
     return 0;
 }
 
+int endless ()
+{
+    HIDE_CURSOR ();
+    syscls ();
+
+    // thread output_thread (dooutput);
+    // output_thread.detach ();
+
+    OUTPUT_STOP = 0, AdventureMove::GAMEDIED = 0, AdventureMove::GAMEWIN = 0;
+
+    int k = Endless::ctrl ();
+    // if (k == -1) return 1;
+    SHOW_CURSOR ();
+    return k;
+}
+
 int chapter_start ()
 {
     int k = ChapterFunc::func_chapter ();
     if (k == -1) return 0;
-    if (k == 1) return adventure ();
-    if (k == 2) return 6;
+    if (k == 0) return adventure ();
+    if (k == 1) return endless ();
     return 0;
 }
 
@@ -93,5 +110,6 @@ int main (int argc, char * argv[])
         return 1;
     }
 
-    return chapter_start ();
+    // return chapter_start ();
+    return adventure ();
 }
