@@ -67,7 +67,14 @@ char OUTPUT_RIGHT_INFO[1000], BOTTOM_LEFT_INFO[1000], BOTTOM_RIGHT_INFO[1000];
 
 int OUTPUT_STOP = 0, SEL_OUTPUT_STOP = 0, CHAPTER_OUTPUT_STOP = 0, ENDLESS_OUTPUT_STOP = 0;
 
-int endless_field[10][inf];
+int endless_field[10][5005];
+/*
+5 lines.
+LEFT STUFF   ENDLESS_MID(H)    RIGHT STUFF
+*/
+
+int ENDLESS_MID = 2000;
+const int ENDLESS_JUMP = int (1.0 * MOVEUP_TIME * 1.3);
 
 inline string getdatapath (char *x)
 {

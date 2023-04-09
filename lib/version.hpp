@@ -1,7 +1,7 @@
 #ifndef ZFFVER
 #define ZFFVER
 
-#define ZFFVERSION "6.0.17beta"
+#define ZFFVERSION "DEV"
 
 void version_output ()
 {

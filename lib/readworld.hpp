@@ -12,6 +12,11 @@ inline string inttochar (int x)
     return to_string (x);
 }
 
+inline string lltochar (long long x)
+{
+    return to_string (x);
+}
+
 void read_world (int id, string custom = "")
 {
     string mainpath, worldpath, triggerpath;

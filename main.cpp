@@ -5,6 +5,7 @@
 #include <ctime>
 #include <algorithm>
 #include <sys/stat.h>
+#include <climits>
 
 using namespace std;
 
@@ -25,7 +26,7 @@ int readytorun (int &i)
     HIDE_CURSOR ();
     syscls ();
 
-    thread output_thread (dooutput);
+    thread output_thread (AdventureOutput::dooutput);
     output_thread.detach ();
 
     OUTPUT_STOP = 0, AdventureMove::GAMEDIED = 0, AdventureMove::GAMEWIN = 0;
@@ -69,8 +70,8 @@ int endless ()
     HIDE_CURSOR ();
     syscls ();
 
-    // thread output_thread (dooutput);
-    // output_thread.detach ();
+    thread output_thread (EndlessOutput::dooutput);
+    output_thread.detach ();
 
     OUTPUT_STOP = 0, AdventureMove::GAMEDIED = 0, AdventureMove::GAMEWIN = 0;
 
@@ -110,6 +111,6 @@ int main (int argc, char * argv[])
         return 1;
     }
 
-    // return chapter_start ();
-    return adventure ();
+    return chapter_start ();
+    // return adventure ();
 }
