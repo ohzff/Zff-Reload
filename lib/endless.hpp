@@ -7,12 +7,65 @@ namespace Endless
     int GAMEDIED = 0;
     long long GAMESCORE = 0;
 
-    int ENDLESS_GEN_TEMPLATE[10][10] = {
-        {0, 0, 0, 0, 2, 3},
-        {0, 0, 0, 0, 0, 3},
-        {0, 0, 0, 2, 0, 0},
-        {0, 0, 2, 0, 0, 0}
-    }, TEMPLATE_COUNT = 4;
+    class EndlessTemplate
+    {
+        private:
+            IngorTimer stoptimer, gentimer;
+            const int TypeCount = 1;
+            // Type 1
+            const int GEN1[10][10] = {
+                {0, 0, 0, 0, 2, 3},
+                {0, 0, 0, 0, 0, 3},
+                {0, 0, 0, 2, 0, 0},
+                {0, 0, 2, 0, 0, 0}
+            }, GEN1_COUNT = 4;
+            void gen1 (int col)
+            {
+                int r = rand () % GEN1_COUNT;
+                for (int i = 1; i <= 5; i ++)
+                {
+                    endless_field[i][col] = GEN1[r][i];
+                }
+            }
+
+            // Type 2
+            const int GEN2[10][10] = {
+                {0, 0, 0, 0, 2, 2},
+                {0, 0, 0, 0, 0, 2},
+                {0, 0, 0, 2, 2, 2},
+                {0, 0, 2, 0, 2, 0}
+            }, GEN2_COUNT = 4;
+            IngorTimer gen2_timer;
+            void gen2 (int col)
+            {
+                gentimer.setlock (1, 10);
+            }
+
+        public:
+            void generate (int col)
+            {
+                int r = gentimer.getlock ();
+                if (r == -1)
+                {
+                    r = rand () % TypeCount;
+                }
+                
+                switch (r)
+                {
+                case 0:
+                    gen1 (col);
+                    break;
+
+                case 1:
+                    gen2 (col);
+                    break;
+                
+                default:
+                    break;
+                }
+
+            }
+    };
 
     void windowsize_protect ()
     {
@@ -115,17 +168,14 @@ namespace Endless
     }
 
     int genstop = 0, GENTMP = 15;
+    EndlessTemplate endlesstemplate;
 
     inline void world_gen ()
     {
         if (++ genstop >= GENTMP)
         {
             genstop = 0;
-            int r = rand () % TEMPLATE_COUNT;
-            for (int i = 1; i <= 5; i ++)
-            {
-                endless_field[i][WINDOW_Y / 2 + ENDLESS_MID] = ENDLESS_GEN_TEMPLATE[r][i];
-            }
+            endlesstemplate.generate (WINDOW_Y / 2 + ENDLESS_MID);
         }
     }
     

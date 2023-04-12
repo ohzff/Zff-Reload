@@ -42,6 +42,11 @@ namespace AdventureOutput
             putchar ('#');
             break;
 
+        case 10:
+            // Char
+            putchar (field[i][j].ch);
+            break;
+
         default:
             putchar ('?');
             break;
@@ -362,8 +367,8 @@ namespace ChapterOutput
         
         if (kline) 
         {
-            putchar ('\n');
             for (int i = 1; i < WINDOW_Y; i ++) putchar (' ');
+            putchar ('\n');
         }
 
         printf ("%s", BOTTOM_LEFT_INFO);

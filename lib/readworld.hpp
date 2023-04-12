@@ -40,14 +40,9 @@ void read_world (int id, string custom = "")
     memset (field, 0, sizeof (field));
     triggerCount = 0, OUTPUT_STOP = 0;
 
-    // printf ("%s\n", mainpath.c_str ());
-    // printf ("%s\n", worldpath.c_str ());
-    // printf ("%s\n", triggerpath.c_str ());
-
     freopen (mainpath.c_str (), "r", stdin);
     scanf ("%d%d", &n, &m);
     scanf ("%d%d%d%d", &sx, &sy, &ex, &ey);
-    // printf ("N=%d, M=%d\n", n, m);
 
     freopen (worldpath.c_str (), "r", stdin);
     for (int i = 1; i <= n; i ++)
@@ -68,11 +63,21 @@ void read_world (int id, string custom = "")
             case '*':
                 field[i][j].user = 4;
                 break;
-            
-            default:
+            case ' ':
                 field[i][j].user = 0;
                 break;
-            } 
+            default:
+                if (ch == '!')
+                {
+                    field[i][j].user = 0;
+                }
+                else
+                {
+                    field[i][j].user = 10;
+                    field[i][j].ch = ch;
+                }
+                break;
+            }
         }
     }
 

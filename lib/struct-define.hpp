@@ -34,6 +34,7 @@ class Point
     int user; // used by ID
     vector <int> trigger;
     vector <int> ctrlby;
+    char ch;
 
     bool isfree ()
     {
@@ -54,6 +55,8 @@ USED id:
 3. |
 4. Trigger
 5. End
+
+10. Char
 ...
 */
 
@@ -89,5 +92,38 @@ inline string getdatapath (const char x[])
     str = str + x;
     return str;
 }
+
+class IngorTimer
+{
+    int locktime = 0, locknow = 0, lockid = 0;
+
+public:
+
+    IngorTimer ()
+    {
+        lockid = -1;
+    }
+
+    inline void setlock (int _id, int _time)
+    {
+        locktime = _time, lockid = _id, locknow = 0;
+    }
+
+    inline void dellock ()
+    {
+        lockid = -1, locktime = 0, locktime = 0;
+    }
+
+    inline int getlock ()
+    {
+        if (++ locknow >= locktime)
+        {
+            dellock ();
+            return -1;
+        }
+        locktime ++;
+        return lockid;
+    }
+};
 
 #endif
