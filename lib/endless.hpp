@@ -7,11 +7,12 @@ namespace Endless
     int GAMEDIED = 0;
     long long GAMESCORE = 0;
 
+    int genstop = 0, GENTMP = 15;
     class EndlessTemplate
     {
         private:
             IngorTimer stoptimer, gentimer;
-            const int TypeCount = 1;
+            const int TypeCount = 2;
             // Type 1
             const int GEN1[10][10] = {
                 {0, 0, 0, 0, 2, 3},
@@ -29,19 +30,29 @@ namespace Endless
             }
 
             // Type 2
-            const int GEN2[10][10] = {
-                {0, 0, 0, 0, 2, 2},
-                {0, 0, 0, 0, 0, 2},
-                {0, 0, 0, 2, 2, 2},
-                {0, 0, 2, 0, 2, 0}
-            }, GEN2_COUNT = 4;
-            IngorTimer gen2_timer;
-            void gen2 (int col)
-            {
-                gentimer.setlock (1, 10);
-            }
+            // const int GEN2[10][10] = {
+            //     {0, 0, 0, 0, 0, 2},
+            //     {0, 0, 0, 0, 0, 2},
+            //     {0, 0, 0, 0, 1, 2}/*,
+            //     {0, 0, 0, 2, 2, 2},
+            //     {0, 0, 2, 0, 2, 0}*/
+            // }, GEN2_COUNT = 3;
+            // void gen2 (int col)
+            // {
+            //     if (gentimer.islock () != 1) gentimer.setlock (1, 10);
+            //     int r = rand () % GEN2_COUNT;
+            //     for (int i = 1; i <= 5; i ++)
+            //     {
+            //         endless_field[i][col] = GEN2[r][i];
+            //     }
+            // }
 
         public:
+            EndlessTemplate ()
+            {
+                // stoptimer.setlock (1, GENTMP);
+            }
+
             void generate (int col)
             {
                 int r = gentimer.getlock ();
@@ -56,14 +67,25 @@ namespace Endless
                     gen1 (col);
                     break;
 
-                case 1:
-                    gen2 (col);
-                    break;
+                // case 1:
+                //     gen2 (col);
+                //     break;
                 
                 default:
+                    gen1 (col);
                     break;
                 }
+            }
 
+            bool isgen ()
+            {
+                if (gentimer.islock () != -1) return true;
+                if (stoptimer.getlock () == -1)
+                {
+                    stoptimer.setlock (1, GENTMP);
+                    return true;
+                }
+                return false;
             }
     };
 
@@ -167,14 +189,17 @@ namespace Endless
         ONJUMP = 0;
     }
 
-    int genstop = 0, GENTMP = 15;
     EndlessTemplate endlesstemplate;
 
     inline void world_gen ()
     {
-        if (++ genstop >= GENTMP)
+        // if (++ genstop >= GENTMP)
+        // {
+        //     genstop = 0;
+        //     endlesstemplate.generate (WINDOW_Y / 2 + ENDLESS_MID);
+        // }
+        if (endlesstemplate.isgen ())
         {
-            genstop = 0;
             endlesstemplate.generate (WINDOW_Y / 2 + ENDLESS_MID);
         }
     }

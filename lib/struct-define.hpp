@@ -116,12 +116,17 @@ public:
 
     inline int getlock ()
     {
+        if (lockid == -1) return -1;
         if (++ locknow >= locktime)
         {
             dellock ();
             return -1;
         }
-        locktime ++;
+        return lockid;
+    }
+
+    inline int islock ()
+    {
         return lockid;
     }
 };

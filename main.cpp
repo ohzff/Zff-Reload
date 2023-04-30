@@ -111,6 +111,8 @@ int main (int argc, char * argv[])
         return 1;
     }
 
+    srand (time (NULL));
+
     return chapter_start ();
     // return adventure ();
 }
